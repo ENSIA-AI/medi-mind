@@ -1,5 +1,5 @@
 name: medi_mind
-description: "A new Flutter project."
+description: "MediMind: Medication Reminder & Companion."
 publish_to: 'none'
 version: 0.1.0
 
@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.6
+  flutter_svg: ^2.0.16
 
 dev_dependencies:
   flutter_test:
@@ -17,3 +19,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: 'Spartan League'
+      fonts:
+        - asset : assets/fonts/LeagueSpartan-Regular.ttf 
+  assets:
+    - assets/images/
+    - assets/icons/
