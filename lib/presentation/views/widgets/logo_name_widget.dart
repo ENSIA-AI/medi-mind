@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:medi_mind/themes/styles.dart';
 
 class LogoNameWidget extends StatelessWidget {
   const LogoNameWidget({
@@ -15,11 +16,7 @@ class LogoNameWidget extends StatelessWidget {
       SvgPicture.asset("assets/icons/app_logo.svg"),
       
       Text("MediMind",
-        style: TextStyle(
-          fontSize: 40,
-          fontWeight: FontWeight.w600,
-          color: Color(0xFF031D44)
-        ),
+        style: LOGO_NAME_TEXT_STYLE,
       )
     ],);
   }
