@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medi_mind/presentation/bloc/bottom_nav_bloc.dart';
-import 'package:medi_mind/presentation/views/main_app_screen.dart';
+import 'package:medi_mind/presentation/views/on_boarding_pages.dart';
 import 'package:medi_mind/presentation/views/splash_screen.dart';
 import 'package:medi_mind/themes/themes.dart';
 
@@ -23,7 +23,7 @@ class _MainAppState extends State<MainApp> {
       create: (context) => BottomNavCubit(),
       child: MaterialApp(
         theme: materialTheme ,
-        home: SplashScreen(),
+        home: const OnBoardingPages(),
       ),
     );
   }

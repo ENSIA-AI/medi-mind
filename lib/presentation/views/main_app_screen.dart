@@ -7,6 +7,8 @@ import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/utils/pages_enum.dart';
 
 class MainAppScreen extends StatefulWidget {
+  const MainAppScreen({super.key});
+
   @override
   State<MainAppScreen> createState() => _MainAppScreenState();
 }
@@ -35,8 +37,8 @@ class _MainAppScreenState extends State<MainAppScreen> {
         return Scaffold(
           bottomNavigationBar: BottomNavigationBar(
               iconSize: 40,
-              unselectedIconTheme: IconThemeData(color: PRIMARY_BLUE),
-              selectedIconTheme: IconThemeData(color: SECONDARY_RED),
+              unselectedIconTheme: const IconThemeData(color: PRIMARY_BLUE),
+              selectedIconTheme: const IconThemeData(color: SECONDARY_RED),
               showSelectedLabels: false,
               showUnselectedLabels: false,
               currentIndex: BlocProvider.of<BottomNavCubit>(context).state,
@@ -45,7 +47,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
                     .changeSelectedPage(value);
                 _currentPageController.animateToPage(value,
                     curve: Curves.bounceIn,
-                    duration: Duration(milliseconds: 200));
+                    duration: const Duration(milliseconds: 200));
               },
               items: [
                 BottomNavBarItem(context, "assets/icons/Home.svg", "Home", HOMEPAGE_INDEX,

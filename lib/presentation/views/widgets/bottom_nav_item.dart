@@ -17,7 +17,7 @@ BottomNavigationBarItem BottomNavBarItem(
       activeIcon: Column(
         children: [
           SvgPicture.asset(iconPath, color: SECONDARY_RED),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Container(
