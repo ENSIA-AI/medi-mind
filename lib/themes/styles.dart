@@ -25,3 +25,31 @@ TextStyle LOGO_NAME_TEXT_STYLE = const TextStyle(
           fontWeight: FontWeight.w600,
           color: Color(0xFF031D44)
         );
+
+Color Transparent_bg = const Color.fromARGB(40, 3, 29, 68);
+
+TextStyle DETAILS_TEXT = const TextStyle(
+    fontSize: 30, fontWeight: FontWeight.w600, color: Color.fromARGB(255, 255, 233, 174));
+
+TextStyle DETAILS_ALARM = const TextStyle(
+    fontSize: 30, fontWeight: FontWeight.w500, color: Colors.white);
+
+TextStyle DETAILS_See_MORE = const TextStyle(
+    fontSize: 20, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 255, 233, 174));
+
+ButtonStyle GREEN_NOTIFICATION_BTN = ElevatedButton.styleFrom(
+    backgroundColor: Colors.green, elevation: 5);
+
+ButtonStyle RED_NOTIFICATION_BTN = ElevatedButton.styleFrom(
+    backgroundColor:  Colors.red, elevation: 5);
+
+// mainly used for headers
+TextStyle BLUE_SUBHEADING_TEXT_STYLE = const TextStyle(
+    fontSize: 24, fontWeight: FontWeight.w600, color: Color(0xFF031D44));
+
+TextStyle REGULAR_TEXT_STYLE = const TextStyle(
+    fontSize: 16, fontWeight: FontWeight.w400, color: Colors.black);
+
+// smaller version 
+TextStyle REGULAR_TEXT_STYLE_white = const TextStyle(
+    fontSize: 16, fontWeight: FontWeight.w400, color: Colors.white );
