@@ -20,8 +20,8 @@ class ReminderItem extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.red.shade400,
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -38,7 +38,7 @@ class ReminderItem extends StatelessWidget {
             width: double.infinity,
             clipBehavior: Clip.hardEdge,
             height: 200,
-            decoration: BoxDecoration(color: PRIMARY_BLUE),
+            decoration: const BoxDecoration(color: PRIMARY_BLUE),
             child: Row(
               children: [
                 Padding(
@@ -59,28 +59,28 @@ class ReminderItem extends StatelessWidget {
                       "${data.name} , ${data.dosage}",
                       style: BEIGE_SUBHEADING_TEXT_STYLE,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
                       "${data.form}, ${data.frequency}",
                       style: WHITE_REGULAR_TEXT_STYLE,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.alarm,
                           color: Colors.white,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
-                        Text("${data.time}", style: WHITE_REGULAR_TEXT_STYLE)
+                        Text(data.time, style: WHITE_REGULAR_TEXT_STYLE)
                       ],
                     )
                   ],

@@ -5,6 +5,8 @@ import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/themes/styles.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -23,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
 
     _controller = AnimationController(
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
       vsync: this,
     );
 
@@ -33,24 +35,25 @@ class _SplashScreenState extends State<SplashScreen>
 
   Future<void> _startAnimations() async {
     // Animate the icon
-    await Future.delayed(Duration(milliseconds: 500)); // Optional delay
+    await Future.delayed(const Duration(milliseconds: 500)); // Optional delay
     setState(() {
       _iconOpacity = 1;
       _iconPosition = 0; // Move icon to its final position
     });
 
     // Animate the text after the icon animation
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 500));
     setState(() {
       _textOpacity = 1;
       _textPosition = 0; // Move text to its final position
     });
 
     // Navigate to the next screen after a short delay
-    await Future.delayed(Duration(milliseconds: 500));
-    if (mounted)
+    await Future.delayed(const Duration(milliseconds: 500));
+    if (mounted) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => MainAppScreen()));
+    }
   }
 
   @override
@@ -69,9 +72,9 @@ class _SplashScreenState extends State<SplashScreen>
           children: [
             AnimatedOpacity(
               opacity: _iconOpacity,
-              duration: Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 500),
               child: AnimatedContainer(
-                duration: Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 500),
                 curve: Curves.easeOut,
                 transform: Matrix4.translationValues(0, _iconPosition, 0),
                 child: SvgPicture.asset(
@@ -84,9 +87,9 @@ class _SplashScreenState extends State<SplashScreen>
             ),
             AnimatedOpacity(
               opacity: _textOpacity,
-              duration: Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 500),
               child: AnimatedContainer(
-                duration: Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 500),
                 curve: Curves.easeOut,
                 transform: Matrix4.translationValues(0, _textPosition, 0),
                 child: Text(

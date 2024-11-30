@@ -11,7 +11,9 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.6
   flutter_svg: ^2.0.16
+  smooth_page_indicator: ^1.2.0+3
   percent_indicator: ^4.2.4
+
 
 dev_dependencies:
   flutter_test:

@@ -24,14 +24,14 @@ dynamic PAGES_LIST = [
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 200,
           ),
           Expanded(
               child: ListView.builder(
             itemCount: 1,
             itemBuilder: (context, index) {
-              return ReminderItem(
+              return const ReminderItem(
                 data: sampleReminder,
               );
             },
@@ -40,25 +40,45 @@ dynamic PAGES_LIST = [
       ),
     ),
   ),
-  Column(mainAxisAlignment: MainAxisAlignment.center, children: const [
+  const Column(mainAxisAlignment: MainAxisAlignment.center, children: [
     Text("This is My Medication !"),
     SizedBox(
       height: 80,
     ),
     Icon(Icons.add_alert_rounded)
   ]),
-  Column(mainAxisAlignment: MainAxisAlignment.center, children: const [
+  const Column(mainAxisAlignment: MainAxisAlignment.center, children: [
     Text("This is My Schedule !"),
     SizedBox(
       height: 80,
     ),
     Icon(Icons.calendar_month),
   ]),
-  Column(mainAxisAlignment: MainAxisAlignment.center, children: const [
+  const Column(mainAxisAlignment: MainAxisAlignment.center, children: [
     Text("This is My Settings !"),
     SizedBox(
       height: 80,
     ),
     Icon(Icons.settings)
   ]),
+];
+
+
+
+const List<Map> onBoardingInfo = [
+  {
+    "imageUrl" : "assets/images/onBoarding1.png",
+    "title" : "Start your journey!",
+    "description" : "MediMind Helps you eat your breakfast, do your SWE homework and most importantly can do simplex"
+  },
+  {
+    "imageUrl" : "assets/images/onBoarding2.png",
+    "title" : "Conquer the world!",
+    "description" : "MediMind Helps you eat your dinner, do your OR quiz and most importantly malia dont read this"
+  },
+  {
+    "imageUrl" : "assets/images/onBoarding3.png",
+    "title" : "Find your goals!",
+    "description" : "MediMind Helps you eat your dinner, do your OR quiz and most importantly malia dont read this"
+  }
 ];
