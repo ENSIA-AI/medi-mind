@@ -1,26 +1,23 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-
-// list used for the conversion of data 
+// List used for the conversion of data
 List<String> monthList = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ];
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
+];
 
-
-// add the format check later  and values range check later 
-class BarChartProgress extends StatelessWidget {
+class BarChartProgress extends StatefulWidget {
   final double maxValuesY;
   final List<List<double>> values; // Format: [[x values], [y values]]
   final Color barChartColor;
@@ -35,95 +32,122 @@ class BarChartProgress extends StatelessWidget {
   });
 
   @override
+  _BarChartProgressState createState() => _BarChartProgressState();
+}
+
+class _BarChartProgressState extends State<BarChartProgress>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // Ensure `values` has valid data
-    if (values.isEmpty || values[0].length != values[1].length) {
+    if (widget.values.isEmpty || widget.values[0].length != widget.values[1].length) {
       return const Center(child: Text('Invalid data for chart'));
     }
 
     // Normalize Y values if typeOfUse is false (percentage mode)
-    final normalizedYValues = typeOfUse
-        ? values[1]
-        : values[1].map((y) => (y / maxValuesY) * 100).toList();
+    final normalizedYValues = widget.typeOfUse
+        ? widget.values[1]
+        : widget.values[1].map((y) => (y / widget.maxValuesY) * 100).toList();
 
-    return Container(
+    return SizedBox(
       width: 350,
       height: 243,
       child: Center(
         child: SizedBox(
           width: 320,
           height: 220,
-          child: BarChart(
-            BarChartData(
-              maxY: typeOfUse ? maxValuesY : 100,
-              gridData: const FlGridData(
-                show: false,
-              ),
-              borderData: FlBorderData(
-                show: true,
-                border: const Border(
-                  left: BorderSide(color: Colors.black),
-                  bottom: BorderSide(color: Colors.black),
-                ),
-              ),
-              titlesData: FlTitlesData(
-                topTitles: const AxisTitles(
-                  sideTitles: SideTitles(showTitles: false),
-                ),
-                rightTitles: const AxisTitles(
-                  sideTitles: SideTitles(showTitles: false),
-                ),
-                bottomTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: true,
-                    getTitlesWidget: (value, meta) {
-                      final index = value.toInt();
-                      return Text(
-                        typeOfUse
-                            ? monthList[index % monthList.length]
-                            : index.toString(),
-                        style: const TextStyle(fontSize: 10),
-                      );
-                    },
+          child: AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              return BarChart(
+                BarChartData(
+                  maxY: widget.typeOfUse ? widget.maxValuesY : 100,
+                  gridData: const FlGridData(
+                    show: false,
                   ),
-                ),
-                leftTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: true,
-                    reservedSize: 40, 
-                    getTitlesWidget: (value, meta) {
-                      if (!typeOfUse) {
-                        return Text(
-                          '${value.toInt()}%',
-                          style: const TextStyle(fontSize: 10),
-                          textAlign: TextAlign.center,
-                        );
-                      } else {
-                        return Text(
-                          value.toStringAsFixed(0),
-                          style: const TextStyle(fontSize: 10),
-                          textAlign: TextAlign.center,
-                        );
-                      }
-                    },
+                  borderData: FlBorderData(
+                    show: true,
+                    border: const Border(
+                      left: BorderSide(color: Colors.black),
+                      bottom: BorderSide(color: Colors.black),
+                    ),
                   ),
-                ),
-              ),
-              barGroups: [
-                for (int i = 0; i < values[0].length; i++)
-                  BarChartGroupData(
-                    x: values[0][i].toInt(),
-                    barRods: [
-                      BarChartRodData(
-                        toY: normalizedYValues[i],
-                        color: barChartColor,
-                        width: 14,
-                        borderRadius: BorderRadius.zero,
+                  titlesData: FlTitlesData(
+                    topTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    rightTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        getTitlesWidget: (value, meta) {
+                          final index = value.toInt();
+                          return Text(
+                            widget.typeOfUse
+                                ? monthList[index % monthList.length]
+                                : index.toString(),
+                            style: const TextStyle(fontSize: 10),
+                          );
+                        },
                       ),
-                    ],
+                    ),
+                    leftTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 40,
+                        getTitlesWidget: (value, meta) {
+                          if (!widget.typeOfUse) {
+                            return Text(
+                              '${value.toInt()}%',
+                              style: const TextStyle(fontSize: 10),
+                              textAlign: TextAlign.center,
+                            );
+                          } else {
+                            return Text(
+                              value.toStringAsFixed(0),
+                              style: const TextStyle(fontSize: 10),
+                              textAlign: TextAlign.center,
+                            );
+                          }
+                        },
+                      ),
+                    ),
                   ),
-              ],
-            ),
+                  barGroups: [
+                    for (int i = 0; i < widget.values[0].length; i++)
+                      BarChartGroupData(
+                        x: widget.values[0][i].toInt(),
+                        barRods: [
+                          BarChartRodData(
+                            toY: normalizedYValues[i] * _controller.value,
+                            color: widget.barChartColor,
+                            width: 14,
+                            borderRadius: BorderRadius.zero,
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
       ),
