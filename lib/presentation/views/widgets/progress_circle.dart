@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-
-
 class WidgetMedProgress extends StatelessWidget {
   final String type;
   final String dateFormat;
   final double progressVal;
-  const WidgetMedProgress(
-      {super.key, required this.type, required this.dateFormat , required this.progressVal});
+  const WidgetMedProgress({
+    super.key,
+    required this.type,
+    required this.dateFormat,
+    required this.progressVal,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 155,
-      height: 197,
+      width: 140, // Medium width
+      height: 180, // Medium height
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(14), // Slightly rounded corners
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
             spreadRadius: 2,
-            blurRadius: 6,
+            blurRadius: 5,
             offset: const Offset(0, 3),
           ),
         ],
@@ -31,13 +33,23 @@ class WidgetMedProgress extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(type,
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 2), // Add spacing between texts
-            Text(dateFormat,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
-            const SizedBox(height: 8), // Add spacing before the progress indicator
-            MedProgress(progressValue: progressVal)
+            Text(
+              type,
+              style: const TextStyle(
+                fontSize: 18, // Moderately reduced size
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 4), // Moderate spacing
+            Text(
+              dateFormat,
+              style: const TextStyle(
+                fontSize: 16, // Readable size
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            const SizedBox(height: 10), // Adequate spacing
+            MedProgress(progressValue: progressVal),
           ],
         ),
       ),
@@ -46,7 +58,6 @@ class WidgetMedProgress extends StatelessWidget {
 }
 
 class MedProgress extends StatefulWidget {
-  //progressValue double between 0 to 1
   final double progressValue;
 
   const MedProgress({super.key, required this.progressValue});
@@ -55,30 +66,61 @@ class MedProgress extends StatefulWidget {
   State<MedProgress> createState() => _MedProgressState();
 }
 
-class _MedProgressState extends State<MedProgress> {
+class _MedProgressState extends State<MedProgress>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _progressAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 4),
+      vsync: this,
+    );
+
+    _progressAnimation = Tween<double>(
+      begin: 0,
+      end: widget.progressValue,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeOut,
+    ))..addListener(() {
+        setState(() {});
+      });
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CircularPercentIndicator(
-      radius: 60,
-      lineWidth: 10,
-      percent: widget.progressValue,
-      progressColor: _getProgressColor(widget.progressValue),
+      radius: 55, // Balanced radius
+      lineWidth: 9, // Moderate line width
+      percent: _progressAnimation.value,
+      progressColor: _getProgressColor(_progressAnimation.value),
       circularStrokeCap: CircularStrokeCap.round,
       center: Column(
-        mainAxisAlignment: MainAxisAlignment.center, 
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            '${_convertToPercentage(widget.progressValue)}%', 
+            '${_convertToPercentage(_progressAnimation.value)}%',
             style: const TextStyle(
-              fontSize: 30, 
-              fontWeight: FontWeight.bold, 
+              fontSize: 26, // Slightly reduced for compactness
+              fontWeight: FontWeight.bold,
             ),
           ),
           const Text(
-            "Complete", 
+            "Complete",
             style: TextStyle(
-              fontSize: 16, 
-              fontWeight: FontWeight.w500, 
+              fontSize: 14, // Moderate size for labels
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],
@@ -87,8 +129,6 @@ class _MedProgressState extends State<MedProgress> {
   }
 }
 
-
-//define depending on a threshold the color of the progress indicator
 Color _getProgressColor(double progressValue) {
   if (progressValue < 0.4) {
     return Colors.red;
