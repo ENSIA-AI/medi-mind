@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:medi_mind/presentation/views/widgets/action_button.dart';
-import 'package:medi_mind/presentation/views/widgets/logo_name_widget.dart';
-import 'package:medi_mind/presentation/views/widgets/on_boarding_page_info.dart';
+import 'package:medi_mind/presentation/views/widgets/common/logo_name_widget.dart';
+import 'package:medi_mind/presentation/views/widgets/Boarding%20Screens/on_boarding_page_info.dart';
 import 'package:medi_mind/themes/colors.dart';
-import 'package:medi_mind/themes/styles.dart';
 import 'package:medi_mind/utils/pages_enum.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -29,8 +26,6 @@ class _OnBoardingPagesState extends State<OnBoardingPages> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
     super.initState();
     _currentOnBoardingPage.addListener(() {
       setState(() {

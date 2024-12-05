@@ -10,20 +10,25 @@ class ActionButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     required this.style,
-    required this.textStyle
+    required this.textStyle,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return SizedBox(
+      width: 180.0, // Set the desired width for all buttons
+      child: ElevatedButton(
         onPressed: onPressed,
         style: style,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 40),
+          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
           child: Text(
             text,
             style: textStyle,
+            textAlign: TextAlign.center, // Ensure the text is centered
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

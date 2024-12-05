@@ -24,7 +24,7 @@ class BottomDialog extends StatelessWidget {
       shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
     ),
-    barrierColor: Transparent_bg,
+    barrierColor: TRANSPARENT_BG,
       builder: (BuildContext context) {
         return Container(
           height: 242,
@@ -41,7 +41,7 @@ class BottomDialog extends StatelessWidget {
               const SizedBox(height: 20),
               Text(
                 textOfBottomSheet,
-                style: REGULAR_TEXT_STYLE,
+                style: BLACK_REGULAR_TEXT_STYLE,
               ),
               const SizedBox(height: 20),
               Row(
@@ -51,14 +51,14 @@ class BottomDialog extends StatelessWidget {
                     onPressed: () {
                       print("pressed $leftBtn");
                     },
-                    style: SECONDARY_SIGNUP_BUTTON_STYLE,
+                    style: SECONDARY_ACTION_BUTTON_STYLE,
                     child: Text(leftBtn , style: WHITE_REGULAR_TEXT_STYLE,),
                   ),
                   ElevatedButton(
                     onPressed: () {
                      print("pressed $rightBtn");
                     },
-                    style : PRIMARY_LOGIN_BUTTON_STYLE,
+                    style : PRIMARY_ACTION_BUTTON_STYLE,
                     child: Text(rightBtn ,style: WHITE_REGULAR_TEXT_STYLE,)
                   ),
                 ],

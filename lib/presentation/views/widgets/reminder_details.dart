@@ -21,7 +21,7 @@ class MedDetails extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
-      barrierColor: Transparent_bg,
+      barrierColor: TRANSPARENT_BG,
       builder: (BuildContext context) {
         return Container(
           decoration: const BoxDecoration(
@@ -79,7 +79,7 @@ class MedDetails extends StatelessWidget {
                     },
                     child: Text(
                       "See More",
-                      style: DETAILS_See_MORE,
+                      style: DETAILS_SEE_MORE,
                     ),
                   ),
                 ],
