@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/themes/colors.dart';
-import 'package:project/themes/styles.dart';
+import 'package:medi_mind/themes/colors.dart';
+import 'package:medi_mind/themes/styles.dart';
 
 
 class MedTimingTile extends StatelessWidget {
@@ -26,7 +26,7 @@ class MedTimingTile extends StatelessWidget {
             title: Text( title,
             style: BEIGE_SUBHEADING_TEXT_STYLE, ),
             subtitle: Text( subtitle,
-            style: WHITE_TEXT_STYLE,
+            style: WHITE_REGULAR_TEXT_STYLE,
              ),
            dense: true,
             //onTap: (){},  

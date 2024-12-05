@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/themes/colors.dart';
+import 'package:medi_mind/themes/colors.dart';
 
 
 class DayBlob extends StatelessWidget {
@@ -14,8 +14,7 @@ class DayBlob extends StatelessWidget {
   @override
 Widget build(BuildContext context) {
     return Container(
-      width: 54,
-      height: 95,
+      padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: passed? PRIMARY_BLUE: Colors.grey ,
         borderRadius: BorderRadius.circular(28),
@@ -26,13 +25,13 @@ Widget build(BuildContext context) {
         children: [
           // the day text
           Text(day,
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            style: TextStyle(color: Colors.white, fontSize: 16),
                ),
           //space     
-          SizedBox(height: 8),
+          SizedBox(height: 5),
           //the colored circle
           CircleAvatar(
-            radius: 20,
+            radius: 15,
             backgroundColor: color,
             child:
               //day text

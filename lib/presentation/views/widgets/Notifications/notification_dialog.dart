@@ -32,8 +32,8 @@ class NotificationAlert extends StatelessWidget {
             height: 30,
           ),
           const SizedBox(height: 5),
-          Text(medName, style: REGULAR_TEXT_STYLE),
-          Text(medTime, style: REGULAR_TEXT_STYLE),
+          Text(medName, style: BLACK_REGULAR_TEXT_STYLE),
+          Text(medTime, style: BLACK_REGULAR_TEXT_STYLE),
           const SizedBox(height: 10),
           Row(
             children: [
@@ -45,7 +45,7 @@ class NotificationAlert extends StatelessWidget {
                 style: GREEN_NOTIFICATION_BTN,
                 child: Text(
                   "done",
-                  style: REGULAR_TEXT_STYLE_white,
+                  style: REGULAR_TEXT_STYLE_WHITE,
                 ),
               ),
               const SizedBox(width: 30),
@@ -56,7 +56,7 @@ class NotificationAlert extends StatelessWidget {
                 style: RED_NOTIFICATION_BTN,
                 child: Text(
                   "skip",
-                  style: REGULAR_TEXT_STYLE_white,
+                  style: REGULAR_TEXT_STYLE_WHITE,
                 ),
               ),
             ],
@@ -83,7 +83,7 @@ class InvokNotif extends StatelessWidget {
           onPressed: () {
             
             showDialog(
-              barrierColor: Transparent_bg,
+              barrierColor: TRANSPARENT_BG,
               context: context,
               builder: (BuildContext context) {
                 return const NotificationAlert(

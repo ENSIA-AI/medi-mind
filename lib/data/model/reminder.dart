@@ -1,20 +1,24 @@
+import 'package:medi_mind/data/model/intake.dart';
+
 class Reminder {
   final String id; // Unique identifier for the reminder
   final String name; // Name of the medication
-  final String dosage; // Dosage amount (e.g., "10mg")
-  final String frequency; // Frequency of intake (e.g., "Once Per Day")
-  final String form; // Form of medication (e.g., "1 Pill")
+  final int frequency; // Frequency of intake (e.g., "Once Per Day")
+  final String form; // Form of medication (e.g., "Pill(s)")
   final String imageUrl; // URL of the medication image
-  final String time; // Reminder time
+  final List<IntakeData> intakes; // List of intake details
+  final List<int> selectedDays; // List of selected days (e.g., [0, 1, 2] for Sunday, Monday, Tuesday)
+  final DateTime? endDate; // Nullable end date for taking the medication
 
   const Reminder({
     required this.id,
     required this.name,
-    required this.dosage,
     required this.frequency,
     required this.form,
     required this.imageUrl,
-    required this.time,
+    required this.intakes,
+    required this.selectedDays, // Add selectedDays as a required parameter
+    this.endDate, // Nullable end date
   });
 
   /// Factory constructor to create a Reminder from a JSON map
@@ -22,11 +26,14 @@ class Reminder {
     return Reminder(
       id: json['id'] as String,
       name: json['name'] as String,
-      dosage: json['dosage'] as String,
-      frequency: json['frequency'] as String,
+      frequency: json['frequency'] as int,
       form: json['form'] as String,
       imageUrl: json['imageUrl'] as String,
-      time: json['time'] as String,
+      intakes: (json['intakes'] as List<dynamic>)
+          .map((e) => IntakeData.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      selectedDays: List<int>.from(json['selectedDays'] as List), // Parse the selectedDays list
+      endDate: json['endDate'] != null ? DateTime.parse(json['endDate']) : null, // Parse endDate if it exists
     );
   }
 
@@ -35,11 +42,12 @@ class Reminder {
     return {
       'id': id,
       'name': name,
-      'dosage': dosage,
       'frequency': frequency,
       'form': form,
       'imageUrl': imageUrl,
-      'time': time,
+      'intakes': intakes.map((e) => e.toJson()).toList(),
+      'selectedDays': selectedDays, // Include selectedDays in the JSON map
+      'endDate': endDate?.toIso8601String(), // Convert endDate to ISO 8601 string if it's not null
     };
   }
 }

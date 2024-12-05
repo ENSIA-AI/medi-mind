@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/themes/styles.dart';
-import 'package:project/themes/colors.dart';
+import 'package:medi_mind/themes/styles.dart';
+import 'package:medi_mind/themes/colors.dart';
 
 class MedCard extends StatelessWidget {
   const MedCard({super.key, required this.title, required this.subtitle, required this.picpath});
@@ -42,7 +42,7 @@ class MedCard extends StatelessWidget {
                     children: [
                       Text( title, style: BEIGE_SUBHEADING_TEXT_STYLE, ),
                        const SizedBox(width: 8,),
-                      Text( subtitle, style: WHITE_TEXT_STYLE , ),   
+                      Text( subtitle, style: WHITE_REGULAR_TEXT_STYLE , ),   
                     ],
                         ),
                 ),

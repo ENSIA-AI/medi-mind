@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project/themes/styles.dart';
-import 'package:project/themes/colors.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:medi_mind/themes/colors.dart';
+import 'package:medi_mind/themes/styles.dart';
+
 
 class SettingTile extends StatelessWidget {
   const SettingTile({super.key, required this.title, required this.iconPath });
@@ -18,9 +20,9 @@ class SettingTile extends StatelessWidget {
       color: const Color.fromARGB(255, 255, 255, 255),
       child: 
         ListTile(
-            leading: SvgPicture.asset(iconPath, color: PRIMARY_BLUE, size: 30),
+            leading: SvgPicture.asset(iconPath, color: PRIMARY_BLUE, width: 30),
             title: Text( title,
-            style: BLUE_REGULAR_TEXT_STYLE, ),
+            style: BLUE_SUBHEADING_TEXT_STYLE, ),
             trailing: Icon(Icons.arrow_forward_ios_rounded, color: PRIMARY_BLUE),
             //onTap: (){},  
                 ),

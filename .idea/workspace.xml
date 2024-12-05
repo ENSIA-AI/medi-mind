@@ -5,24 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efb23bac-eac8-4273-9078-bf1c0d50cf50" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/model/reminder.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/model/reminder.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/views/main_app_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/views/main_app_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/views/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/views/splash_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/bottom_nav_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/views/widgets/bottom_nav_item.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/reminder_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/views/widgets/reminder_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/on_boarding_pages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/views/on_boarding_pages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/AddMedPic.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/DayBlob.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/MedCard.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/NotificationTile.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/ScheduleFrequencyTile.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/SelectTimes.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/SettingTile.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/action_button.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/bottom_nav_item.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/bottom_sheet.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/logo_name_widget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/notification_dialog.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/on_boarding_page_info.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/progress_circle.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/reminder_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/views/widgets/reminder_details.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/views/widgets/reminder_item.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/themes/colors.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/themes/colors.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/themes/styles.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/themes/styles.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/utils/pages_enum.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/pages_enum.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/medi_mind.iml" beforeDir="false" afterPath="$PROJECT_DIR$/medi_mind.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,11 +102,20 @@
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ziyeus/Videos&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ziyeus/Developpment/medi-mind/assets/icons&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ziyeus\Developpment\medi-mind\assets\icons" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ziyeus\Developpment\medi-mind\assets\icons" />
+      <recent name="C:\Users\ziyeus\Developpment\medi-mind\assets\images" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

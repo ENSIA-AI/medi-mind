@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project/themes/styles.dart';
-import 'package:project/themes/colors.dart';
+
+import 'package:medi_mind/themes/colors.dart';
+import 'package:medi_mind/themes/styles.dart';
 
 //text styles need to be added
 
@@ -30,7 +31,7 @@ class NotificationTile extends StatelessWidget {
         ),
       
         title: Text( title,
-        style: BLUE_TEXT_STYLE,
+        style: BLUE_SUBHEADING_TEXT_STYLE,
         ),
         subtitle: Row(
           mainAxisAlignment: MainAxisAlignment.start,

@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medi_mind/presentation/bloc/bottom_nav_bloc.dart';
-import 'package:medi_mind/presentation/views/widgets/bottom_nav_item.dart';
+import 'package:medi_mind/presentation/views/widgets/Bottom%20Navigation/bottom_nav_item.dart';
 import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/utils/pages_enum.dart';
 
 class MainAppScreen extends StatefulWidget {
-  const MainAppScreen({super.key});
+  const   MainAppScreen({super.key});
 
   @override
   State<MainAppScreen> createState() => _MainAppScreenState();
@@ -36,7 +36,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
       builder: (context, state) {
         return Scaffold(
           bottomNavigationBar: BottomNavigationBar(
-              iconSize: 40,
+              iconSize: 20,
               unselectedIconTheme: const IconThemeData(color: PRIMARY_BLUE),
               selectedIconTheme: const IconThemeData(color: SECONDARY_RED),
               showSelectedLabels: false,
@@ -66,7 +66,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
                       .changeSelectedPage(value);
                 },
                 controller: _currentPageController,
-                children: topLevelPages),
+                children: PAGES_LIST),
           ),
         );
       },
