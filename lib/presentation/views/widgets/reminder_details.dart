@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:medi_mind/data/model/reminder.dart';
+import 'package:medi_mind/presentation/views/widgets/reminder_item.dart';
 import 'package:medi_mind/themes/styles.dart';
 
 class MedDetails extends StatelessWidget {
-  final String medication;
-  final String medDosage;
-  final String medTime;
+  final Reminder medREminder;
 
-  const MedDetails({
-    super.key,
-    required this.medication,
-    required this.medDosage,
-    required this.medTime,
-  });
+  const MedDetails({super.key, required this.medREminder});
 
   void _showBottomSheet(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final bottomSheetHeight = screenHeight * 0.9;
+    String medication = medREminder.name;
+    String medDosage = medREminder.dosage;
+    String medTime = medREminder.time;
 
     showModalBottomSheet(
       context: context,
@@ -70,14 +68,13 @@ class MedDetails extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-
               // "See More" Button
               Row(
                 children: [
                   const SizedBox(width: 220),
                   TextButton(
                     onPressed: () {
-                      // will be a navigation page 
+                      // will be a navigation page
                       print('See More tapped');
                     },
                     child: Text(
@@ -98,11 +95,11 @@ class MedDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ElevatedButton(
-        onPressed: () => _showBottomSheet(context),
-        // change it later to the box of the medication reminder 
-        child: const Text('Show Med Details'),
-      ),
-    );
+        child: GestureDetector(
+            onTap: () {
+              _showBottomSheet(context);
+              print('Widget clicked!');
+            },
+            child: ReminderItem(data:medREminder )));
   }
 }

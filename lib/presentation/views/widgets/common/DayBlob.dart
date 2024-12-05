@@ -14,7 +14,8 @@ class DayBlob extends StatelessWidget {
   @override
 Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
+      width: 54,
+      height: 95,
       decoration: BoxDecoration(
         color: passed? PRIMARY_BLUE: Colors.grey ,
         borderRadius: BorderRadius.circular(28),
@@ -25,13 +26,13 @@ Widget build(BuildContext context) {
         children: [
           // the day text
           Text(day,
-            style: TextStyle(color: Colors.white, fontSize: 16),
+            style: TextStyle(color: Colors.white, fontSize: 18),
                ),
           //space     
-          SizedBox(height: 5),
+          SizedBox(height: 8),
           //the colored circle
           CircleAvatar(
-            radius: 15,
+            radius: 20,
             backgroundColor: color,
             child:
               //day text
