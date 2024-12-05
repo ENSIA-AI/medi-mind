@@ -1,48 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:project/themes/colors.dart';
-
+import 'package:medi_mind/themes/colors.dart';
 
 class DayBlob extends StatelessWidget {
-
-  const DayBlob({super.key, required this.day, required this.number, required this.color, required this.passed});
+  const DayBlob({
+    super.key,
+    required this.day,
+    required this.number,
+    required this.value,
+    required this.passed,
+  });
 
   final String day;
   final String number;
   final bool passed;
-  final Color color;
+  final double value;
 
   @override
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Container(
-      width: 54,
-      height: 95,
+      width: 45,
+      height: 75,
       decoration: BoxDecoration(
-        color: passed? PRIMARY_BLUE: Colors.grey ,
+        color: PRIMARY_BLUE,
         borderRadius: BorderRadius.circular(28),
-         ),
-
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // the day text
-          Text(day,
-            style: TextStyle(color: Colors.white, fontSize: 18),
-               ),
-          //space     
-          SizedBox(height: 8),
-          //the colored circle
+          Text(
+            day,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+            ),
+          ),
+          const SizedBox(height: 3),
           CircleAvatar(
-            radius: 20,
-            backgroundColor: color,
-            child:
-              //day text
-             Text(
-              '$number',
-              style: TextStyle(color: Colors.white, fontSize: 18),
-                 ),
+            radius: 17.5,
+            backgroundColor: _getColor(value, passed),
+            child: Center(
+              child: Text(
+                number,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+            ),
           ),
         ],
       ),
     );
+  }
+
+  static Color _getColor(double value, bool pass) {
+    if (!pass) {
+      return const Color.fromARGB(255, 174, 198, 207);
+    } else {
+      if (value < 0.4) {
+        return const Color.fromARGB(255, 255, 105, 97);
+      } else if (value < 0.7) {
+        return const Color.fromARGB(255, 255, 179, 71);
+      } else {
+        return const Color.fromARGB(255, 119, 221, 119);
+      }
+    }
   }
 }
