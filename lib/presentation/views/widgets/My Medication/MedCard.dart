@@ -21,7 +21,7 @@ class MedCard extends StatelessWidget {
       alignment: Alignment.center,
       padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
       height: 100,
-      margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8),
+      margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         color: PRIMARY_BLUE,
