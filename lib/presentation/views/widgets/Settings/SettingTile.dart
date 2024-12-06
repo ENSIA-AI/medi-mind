@@ -1,30 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/themes/styles.dart';
 
 
 class SettingTile extends StatelessWidget {
-  const SettingTile({super.key, required this.title, required this.iconPath });
+  const SettingTile({super.key, required this.title, required this.iconPath ,     required this.destination, });
 
   final String title;
-  final String iconPath;
-  //ontap color
-
+  final Icon iconPath;
+  final Widget destination; 
+  
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding:  EdgeInsets.all(15),
+      padding:  const EdgeInsets.all(8),
       height: 90,
-      color: const Color.fromARGB(255, 255, 255, 255),
+      //color: const Color.fromARGB(255, 255, 255, 255),
       child: 
         ListTile(
-            leading: SvgPicture.asset(iconPath, color: PRIMARY_BLUE, width: 30),
+            leading: iconPath,
             title: Text( title,
-            style: BLUE_SUBHEADING_TEXT_STYLE, ),
-            trailing: Icon(Icons.arrow_forward_ios_rounded, color: PRIMARY_BLUE),
-            //onTap: (){},  
+            style: BLUE_TEXT_STYLE, ),
+            trailing: const Icon(Icons.arrow_forward_ios_rounded, color: PRIMARY_BLUE , size: 20,),
+            onTap: () {
+          // Navigate to the destination page
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => destination),
+          );
+        }, 
                 ),
                      );
                                      }
