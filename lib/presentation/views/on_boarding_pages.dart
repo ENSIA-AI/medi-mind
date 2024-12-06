@@ -91,11 +91,15 @@ class _OnBoardingPagesState extends State<OnBoardingPages> {
                           },
                           child: Icon(Icons.arrow_forward_ios_rounded) ) :
                       ElevatedButton(
+                        
                           style: ElevatedButton.styleFrom(
 
                               foregroundColor: Colors.white,
                               backgroundColor: PRIMARY_BLUE, elevation: 5),
-                          onPressed: (){},
+                          onPressed: (){
+                            Navigator.pushReplacementNamed(
+          context, '/main');
+                          },
                           child: Text("Get Started", style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w500

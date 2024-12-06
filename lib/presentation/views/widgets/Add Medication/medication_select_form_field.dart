@@ -28,10 +28,11 @@ class MedicationSelectFormField extends StatelessWidget {
             style: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 20,
+              color: PRIMARY_BLUE
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 5),
 
         // Dropdown
         Row(

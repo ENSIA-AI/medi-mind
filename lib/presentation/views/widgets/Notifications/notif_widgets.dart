@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medi_mind/data/model/notification_obj.dart';
 import 'package:medi_mind/themes/colors.dart';
+import 'package:medi_mind/utils/dates.dart';
 
 // require the string value
 class labelWidget extends StatelessWidget {
@@ -99,6 +100,7 @@ class NotificationItem extends StatelessWidget {
                             style: const TextStyle(
                               color: PRIMARY_BLUE,
                               fontWeight: FontWeight.bold,
+                              fontFamily: "Spartan League",
                                fontSize: 20
                             ),
                           ),
@@ -112,7 +114,7 @@ class NotificationItem extends StatelessWidget {
         
                           ),
                           TextSpan(
-                            text: notification.data.dosage,
+                            text: notification.data.intakes[0].dose.toString(),
                             style: const TextStyle(
                               color: PRIMARY_BLUE,
                               fontWeight: FontWeight.bold,
@@ -133,7 +135,7 @@ class NotificationItem extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          notification.data.time,
+                          notification.data.intakes[0].time.format24Hour(),
                           style: const TextStyle(
                             color: PRIMARY_BLUE,
                             fontSize: 18,

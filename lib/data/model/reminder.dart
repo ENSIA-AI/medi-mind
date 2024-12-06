@@ -1,14 +1,14 @@
 import 'package:medi_mind/data/model/intake.dart';
 
 class Reminder {
-  final String id; // Unique identifier for the reminder
-  final String name; // Name of the medication
-  final int frequency; // Frequency of intake (e.g., "Once Per Day")
-  final String form; // Form of medication (e.g., "Pill(s)")
-  final String imageUrl; // URL of the medication image
-  final List<IntakeData> intakes; // List of intake details
-  final List<int> selectedDays; // List of selected days (e.g., [0, 1, 2] for Sunday, Monday, Tuesday)
-  final DateTime? endDate; // Nullable end date for taking the medication
+  final String id;
+  final String name;
+  final int frequency;
+  final String form;
+  final String imageUrl;
+  final List<IntakeData> intakes;
+  final List<int> selectedDays;
+  final DateTime? endDate;
 
   const Reminder({
     required this.id,
@@ -17,8 +17,8 @@ class Reminder {
     required this.form,
     required this.imageUrl,
     required this.intakes,
-    required this.selectedDays, // Add selectedDays as a required parameter
-    this.endDate, // Nullable end date
+    required this.selectedDays,
+    this.endDate,
   });
 
   /// Factory constructor to create a Reminder from a JSON map
@@ -32,8 +32,8 @@ class Reminder {
       intakes: (json['intakes'] as List<dynamic>)
           .map((e) => IntakeData.fromJson(e as Map<String, dynamic>))
           .toList(),
-      selectedDays: List<int>.from(json['selectedDays'] as List), // Parse the selectedDays list
-      endDate: json['endDate'] != null ? DateTime.parse(json['endDate']) : null, // Parse endDate if it exists
+      selectedDays: List<int>.from(json['selectedDays'] as List),
+      endDate: json['endDate'] != null ? DateTime.parse(json['endDate']) : null,
     );
   }
 
@@ -46,8 +46,31 @@ class Reminder {
       'form': form,
       'imageUrl': imageUrl,
       'intakes': intakes.map((e) => e.toJson()).toList(),
-      'selectedDays': selectedDays, // Include selectedDays in the JSON map
-      'endDate': endDate?.toIso8601String(), // Convert endDate to ISO 8601 string if it's not null
+      'selectedDays': selectedDays,
+      'endDate': endDate?.toIso8601String(),
     };
+  }
+
+  /// `copyWith` method to create a new Reminder instance with modified properties
+  Reminder copyWith({
+    String? id,
+    String? name,
+    int? frequency,
+    String? form,
+    String? imageUrl,
+    List<IntakeData>? intakes,
+    List<int>? selectedDays,
+    DateTime? endDate,
+  }) {
+    return Reminder(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      frequency: frequency ?? this.frequency,
+      form: form ?? this.form,
+      imageUrl: imageUrl ?? this.imageUrl,
+      intakes: intakes ?? this.intakes,
+      selectedDays: selectedDays ?? this.selectedDays,
+      endDate: endDate ?? this.endDate,
+    );
   }
 }

@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:medi_mind/themes/styles.dart';
 
- 
+
+
+
+void showCustomBottomSheet(BuildContext context, typeOfDialog, textOfBottomSheet, leftBtn, rightBtn) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    ),
+    barrierColor: TRANSPARENT_BG,
+      builder: (BuildContext context) {
+        return BottomDialog(typeOfDialog: typeOfDialog, textOfBottomSheet: textOfBottomSheet, leftBtn: leftBtn, rightBtn: rightBtn);
+      },
+    );
+  }
 
 class BottomDialog extends StatelessWidget {
   // will be changed for the delete account or log out 
@@ -18,15 +32,11 @@ class BottomDialog extends StatelessWidget {
     required this.rightBtn,
   });
 
-  void _showBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-    ),
-    barrierColor: TRANSPARENT_BG,
-      builder: (BuildContext context) {
-        return Container(
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
           height: 242,
           width: 360,
           padding: const EdgeInsets.all(16.0),
@@ -66,17 +76,5 @@ class BottomDialog extends StatelessWidget {
             ],
           ),
         );
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(// will be changed later to a text + icon to call it 
-      child: ElevatedButton(
-        onPressed: () => _showBottomSheet(context),
-        child: const Text('Show Bottom Sheet'),
-      ),
-    );
   }
 }

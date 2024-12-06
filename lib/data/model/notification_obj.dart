@@ -5,7 +5,7 @@ class NotificationObj {
   final bool taskValue; // Task completion status : true medication taken else false
   final double notifTime; // the value is in minutes
 
-  const NotificationObj({
+  NotificationObj({
     required this.data,
     required this.taskValue,
     required this.notifTime

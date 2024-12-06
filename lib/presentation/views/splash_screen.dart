@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:medi_mind/presentation/views/main_app_screen.dart';
 import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/themes/styles.dart';
 
@@ -51,8 +50,8 @@ class _SplashScreenState extends State<SplashScreen>
     // Navigate to the next screen after a short delay
     await Future.delayed(const Duration(milliseconds: 500));
     if (mounted) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => MainAppScreen()));
+      Navigator.pushReplacementNamed(
+          context, '/onboarding');
     }
   }
 

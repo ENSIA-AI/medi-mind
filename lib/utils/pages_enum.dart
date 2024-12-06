@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medi_mind/presentation/views/patient_home.dart';
 import 'package:medi_mind/presentation/views/schedule_screen.dart';
 import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/utils/dates.dart';
@@ -10,7 +11,7 @@ const SCHEDULE_PAGE_INDEX = 2;
 const SETTINGS_PAGE_INDEX = 3;
 
 dynamic PAGES_LIST = [
-  
+  HomeScreen(),
   const Column(mainAxisAlignment: MainAxisAlignment.center, children: [
     Text("This is My Medication !"),
     SizedBox(
@@ -18,13 +19,8 @@ dynamic PAGES_LIST = [
     ),
     Icon(Icons.add_alert_rounded)
   ]),
-  const Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-    Text("This is My Schedule !"),
-    SizedBox(
-      height: 80,
-    ),
-    Icon(Icons.calendar_month),
-  ]),
+  ScheduleScreen(),
+  
   const Column(mainAxisAlignment: MainAxisAlignment.center, children: [
     Text("This is My Settings !"),
     SizedBox(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:medi_mind/data/model/intake.dart';
 import 'package:medi_mind/data/model/reminder.dart';
 import 'package:medi_mind/presentation/views/widgets/Schedule%20Screen/day_select_tile.dart';
 import 'package:medi_mind/presentation/views/widgets/common/reminder_item.dart';
 import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/utils/dates.dart';
-import 'package:medi_mind/utils/pages_enum.dart';
+import 'package:medi_mind/utils/dummy_data.dart';
+
 
 class ScheduleScreen extends StatefulWidget {
   ScheduleScreen({super.key});
@@ -15,7 +15,9 @@ class ScheduleScreen extends StatefulWidget {
 }
 class _ScheduleScreenState extends State<ScheduleScreen> {
   DateTime selectedMonth = DateTime(DateTime.now().year, DateTime.now().month);
-  DateTime selectedDate = DateTime(DateTime.now().year, DateTime.now().month);
+  DateTime selectedDate = DateTime(DateTime.now().year, DateTime.now().month,DateTime.now().day);
+
+  
 
   void updateSelectedDay(int value) {
     setState(() {
@@ -51,6 +53,31 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<Reminder> filteredReminders = reminders.where((reminder) {
+    // Match selectedDate.weekday with selectedDays
+    return reminder.selectedDays.contains(selectedDate.weekday);
+  }).toList();
+
+  // Create a combined and sorted list of intakes
+  List<Reminder> interleavedIntakes = [];
+  for (var reminder in filteredReminders) {
+    for (var intake in reminder.intakes) {
+      Reminder newReminder = reminder.copyWith(intakes: [intake]);
+      interleavedIntakes.add(newReminder);
+    }
+  }
+
+  // Sort the interleaved intakes by time
+  interleavedIntakes.sort((a, b) {
+    final timeA = a.intakes[0].time;
+    final timeB = b.intakes[0].time;
+    return timeA.hour == timeB.hour
+        ? timeA.minute.compareTo(timeB.minute)
+        : timeA.hour.compareTo(timeB.hour);
+  });
+
+
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -61,17 +88,29 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: DropdownButton<DateTime>(
+                  icon: Icon(Icons.keyboard_arrow_down_rounded , color: PRIMARY_BLUE,),
                   value: selectedMonth,
                   underline: Container(),
                   items: generateMonthYearList().map((date) {
                     return DropdownMenuItem<DateTime>(
                       value: date,
-                      child: Text(
-                        "${getMonthNameFromInt(date.month)} ${date.year}",
-                        style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: PRIMARY_BLUE),
+                      child: Row(
+                        children: [
+                          Text(
+                            "${getMonthNameFromInt(date.month)} ",
+                            style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: PRIMARY_BLUE),),
+                                Text(
+                            "${date.year}",
+                            style: const TextStyle(
+                                fontSize: 24,
+                                
+                                color: PRIMARY_BLUE),
+                                
+                          ),
+                        ],
                       ),
                     );
                   }).toList(),
@@ -87,6 +126,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                           DateTime.now().day +
                           1, (index) {
                     int day = DateTime.now().day + index;
+                    
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: DaySelectTile(
@@ -131,7 +171,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                               shape: CircleBorder(),
                               backgroundColor: Colors.white,
                               foregroundColor: PRIMARY_BLUE),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/addmed");
+                          },
                           child: Icon(
                             Icons.add,
                             size: 32,
@@ -143,28 +185,20 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   ),
                   Expanded(
                       child: ListView.separated(
-                    itemCount: 5,
+                    itemCount: interleavedIntakes.length,
                     separatorBuilder: (context, index) {
                       return SizedBox(
-                        height: 10,
+                        height: 0,
                       );
                     },
                     itemBuilder: (context, index) {
-                      return ReminderItem(
-                          inverseStyle: true,
-                          data: Reminder(
-                              id: "1",
-                              name: "Doliprane 50mg",
-                              frequency: 2,
-                              form: "Pill(s)",
-                              imageUrl:
-                                  "https://www.medicament.com/20187/doliprane-24-sirop-enfant-100-ml.jpg",
-                              intakes: [
-                                IntakeData(time: TimeOfDay.now(), dose: 3)
-                              ],
-                              selectedDays: [
-                                1
-                              ]));
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: ReminderItem(
+                            onDismissed: (){},
+                            inverseStyle: true,
+                            data: interleavedIntakes[index]),
+                      );
                     },
                   ))
                 ],

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:medi_mind/data/model/intake.dart';
 import 'package:medi_mind/data/model/notification_obj.dart';
 import 'package:medi_mind/data/model/reminder.dart';
-import 'package:medi_mind/presentation/views/widgets/app_barV2.dart';
-import 'package:medi_mind/presentation/views/widgets/notif_widgets.dart';
+import 'package:medi_mind/presentation/views/widgets/common/app_barV2.dart';
+import 'package:medi_mind/presentation/views/widgets/Notifications/notif_widgets.dart';
 
-///____________________________data used for the style __________________________________
-const Reminder sampleReminder = Reminder(
+Reminder sampleReminder = Reminder(
     id: "0",
     name: "Ibuprofen",
-    dosage: "500mg",
-    frequency: "2 Per Day",
+    selectedDays: [0,1],
+    frequency: 2,
     form: "1 Pill",
     imageUrl: "https://cdn11.bigcommerce.com/s-n6ynrx6s4d/images/stencil/1280x1280/products/2377/4521/ibuprofen_tabs__60250.1648242731.jpg?c=1",
-    time: "10:00 AM");
+    intakes: [IntakeData.new(dose: 1, time: TimeOfDay.now())]
+    );
 
-const NotificationObj notiff = NotificationObj(data:sampleReminder , taskValue: true , notifTime: 3 );
-const NotificationObj notiff2 = NotificationObj(data:sampleReminder , taskValue: false , notifTime: 5 );
+ NotificationObj notiff = NotificationObj(data:sampleReminder , taskValue: true , notifTime: 3 );
+ NotificationObj notiff2 = NotificationObj(data:sampleReminder , taskValue: false , notifTime: 5 );
 
 
 class NotificationScreen extends StatelessWidget {
@@ -23,7 +24,8 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      
       backgroundColor: Colors.white,
       appBar: AppBarV2(pageTitle: "Notification"),
       body: SingleChildScrollView( 

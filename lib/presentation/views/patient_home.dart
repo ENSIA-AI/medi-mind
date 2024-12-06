@@ -1,14 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:medi_mind/data/dummy_data.dart';
-import 'package:medi_mind/presentation/views/widgets/DayBlob.dart';
-import 'package:medi_mind/presentation/views/widgets/logo_name_widget.dart';
-import 'package:medi_mind/presentation/views/widgets/no_reminder.dart';
-import 'package:medi_mind/presentation/views/widgets/reminder_details.dart';
+import 'package:medi_mind/data/model/intake.dart';
+import 'package:medi_mind/data/model/reminder.dart';
+import 'package:medi_mind/presentation/views/widgets/common/DayBlob.dart';
+import 'package:medi_mind/presentation/views/widgets/common/logo_name_widget.dart';
+import 'package:medi_mind/presentation/views/widgets/Home%20Screen/no_reminder.dart';
+import 'package:medi_mind/presentation/views/widgets/Home%20Screen/reminder_details.dart';
 import 'package:medi_mind/themes/styles.dart';
+import 'package:medi_mind/utils/dates.dart';
+import 'package:medi_mind/utils/dummy_data.dart';
 
-class PartientHome extends StatelessWidget {
-  const PartientHome({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  DateTime current_time = DateTime.now();
+  List<Reminder> upcoming_reminders_list = [
+    Reminder(
+    id: "0",
+    name: "Ibuprofen",
+    selectedDays: [0,1],
+    frequency: 2,
+    form: "Pill(s)",
+    imageUrl: "https://cdn11.bigcommerce.com/s-n6ynrx6s4d/images/stencil/1280x1280/products/2377/4521/ibuprofen_tabs__60250.1648242731.jpg?c=1",
+    intakes: [IntakeData(dose: 1, time: TimeOfDay.now())]
+    ),
+    Reminder(
+    id: "1",
+    name: "Ibuprofen",
+    selectedDays: [0,1],
+    frequency: 2,
+    form: "Pill(s)",
+    imageUrl: "https://cdn11.bigcommerce.com/s-n6ynrx6s4d/images/stencil/1280x1280/products/2377/4521/ibuprofen_tabs__60250.1648242731.jpg?c=1",
+    intakes: [IntakeData(dose: 1, time: TimeOfDay.now())]
+    )
+  ];
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -37,9 +66,9 @@ class PartientHome extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 // The report of the page
-                Text('Your Schedule:', style: BLUE_SUBHEADING_TEXT_STYLE),
+                Text('Your Progress:', style: BLUE_SUBHEADING_TEXT_STYLE),
                 const SizedBox(height: 10),
-                // Generate DayBlob widgets for 7 days
+                
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -47,9 +76,9 @@ class PartientHome extends StatelessWidget {
                       7,
                       (index) => Row(
                         children: [
-                          DayBlob(
-                            day: days[index],
-                            number: valuesD[index],
+                          DayBlobAlt(
+                            day: getDayNameFromDate(current_time.subtract(Duration(days: (7 - index)))),
+                            number: current_time.subtract(Duration(days: (7 - index))).day.toString(),
                             passed: valuesP[index],
                             value: valuesC[index],
                           ),
@@ -67,16 +96,19 @@ class PartientHome extends StatelessWidget {
                     style: BLUE_SUBHEADING_TEXT_STYLE),
                 const SizedBox(height: 10),
 
-                SizedBox(
-                  height: 170,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        MedDetails(medREminder: rem1),
-                        MedDetails(medREminder: rem2),
-                        const NoReminder(),
-                      ],
-                    ),
+                SingleChildScrollView(
+                  child:  Column(
+                    children: [
+                      upcoming_reminders_list.length > 0 ? 
+                      MedDetails(medREminder: upcoming_reminders_list[0], onDismissed: (String id){
+                        upcoming_reminders_list.removeWhere((item) => item.id == id);
+                        setState(() {
+                          
+                        });
+                      },)
+                      :
+                      NoReminder()
+                    ],
                   ),
                 ),
 

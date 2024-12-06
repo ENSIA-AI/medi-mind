@@ -15,12 +15,11 @@ class AppBarV2 extends StatelessWidget implements PreferredSizeWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         child: GestureDetector(
           onTap: () {
-            debugPrint("Go back icon tapped");
-            Navigator.pop(context); // Navigate back
+            Navigator.pop(context);
           },
           child: const Icon(
-            Icons.arrow_back_ios, 
-            size: 30, 
+            Icons.arrow_back_ios_rounded, 
+            size: 24, 
             color: PRIMARY_BLUE,
           ),
         ),
