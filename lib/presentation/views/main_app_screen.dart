@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medi_mind/presentation/bloc/bottom_nav_bloc.dart';
 import 'package:medi_mind/presentation/views/widgets/Bottom%20Navigation/bottom_nav_item.dart';
+import 'package:medi_mind/presentation/views/widgets/common/app_barV1.dart';
 import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/utils/pages_enum.dart';
 
@@ -35,8 +36,9 @@ class _MainAppScreenState extends State<MainAppScreen> {
     return BlocBuilder<BottomNavCubit, int>(
       builder: (context, state) {
         return Scaffold(
+          appBar: AppBarV1(),
           bottomNavigationBar: BottomNavigationBar(
-              iconSize: 20,
+              
               unselectedIconTheme: const IconThemeData(color: PRIMARY_BLUE),
               selectedIconTheme: const IconThemeData(color: SECONDARY_RED),
               showSelectedLabels: false,

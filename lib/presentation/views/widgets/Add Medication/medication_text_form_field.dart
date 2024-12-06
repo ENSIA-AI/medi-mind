@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:medi_mind/themes/colors.dart';
 
 class MedicationTextFormField extends StatelessWidget {
   final String label;
   final String placeholder;
   final TextEditingController controller ;
+  final bool longText;
   const MedicationTextFormField({
     super.key,
     required this.label,
     required this.placeholder,
-    required this.controller
+    required this.controller,
+    this.longText = false    
   });
 
   @override
@@ -19,17 +22,19 @@ class MedicationTextFormField extends StatelessWidget {
     
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Text("Name" , style: TextStyle(
+          child: Text(label , style: TextStyle(
             fontWeight: FontWeight.w600,
-            fontSize: 20
-    
+            fontSize: 20,
+            color: PRIMARY_BLUE
           ),),
         ),
-        SizedBox(height: 10,),
+        SizedBox(height: 5,),
         Material(
           borderRadius: BorderRadius.circular(20),
           elevation: 10,
           child: TextFormField(
+            maxLines: (longText) ? 3 : 1,
+            minLines: (longText) ? 3 : 1,
             controller: controller,
             validator: (value) {
               if(value == null || value.isEmpty ){

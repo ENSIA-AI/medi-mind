@@ -16,7 +16,7 @@ class ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 180.0, // Set the desired width for all buttons
+      
       child: ElevatedButton(
         onPressed: onPressed,
         style: style,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:medi_mind/presentation/views/widgets/app_barV2.dart';
-import 'package:medi_mind/presentation/views/widgets/progress_bar_chart.dart';
-import 'package:medi_mind/presentation/views/widgets/progress_circle.dart';
-import 'package:medi_mind/presentation/views/widgets/progress_line_chart.dart';
+import 'package:medi_mind/presentation/views/widgets/Report/progress_bar_chart.dart';
+import 'package:medi_mind/presentation/views/widgets/common/app_barV2.dart';
+import 'package:medi_mind/presentation/views/widgets/common/progress_circle.dart';
+import 'package:medi_mind/presentation/views/widgets/Report/progress_line_chart.dart';
 import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/themes/styles.dart';
 

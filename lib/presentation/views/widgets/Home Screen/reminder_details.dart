@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:medi_mind/data/model/reminder.dart';
-import 'package:medi_mind/presentation/views/widgets/reminder_item.dart';
+import 'package:medi_mind/presentation/views/widgets/common/reminder_item.dart';
+import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/themes/styles.dart';
 
 class MedDetails extends StatelessWidget {
   final Reminder medREminder;
-
-  const MedDetails({super.key, required this.medREminder});
+  final Function onDismissed;
+  const MedDetails({super.key, required this.medREminder, required this.onDismissed});
 
   void _showBottomSheet(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final bottomSheetHeight = screenHeight * 0.9;
     String medication = medREminder.name;
-    String medDosage = medREminder.dosage;
-    String medTime = medREminder.time;
+    String medDosage = medREminder.intakes[0].dose.toString();
+    String medTime = medREminder.intakes[0].format24Hour();
 
     showModalBottomSheet(
       context: context,
@@ -25,7 +26,7 @@ class MedDetails extends StatelessWidget {
       builder: (BuildContext context) {
         return Container(
           decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 3, 29, 68),
+            color: PRIMARY_BLUE,
             borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
           ),
           height: bottomSheetHeight,
@@ -100,6 +101,6 @@ class MedDetails extends StatelessWidget {
               _showBottomSheet(context);
               print('Widget clicked!');
             },
-            child: ReminderItem(data:medREminder )));
+            child: ReminderItem(data:medREminder , onDismissed: onDismissed,)));
   }
 }

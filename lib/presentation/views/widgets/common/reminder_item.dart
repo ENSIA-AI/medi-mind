@@ -6,8 +6,9 @@ import 'package:medi_mind/themes/styles.dart';
 
 class ReminderItem extends StatelessWidget {
   final Reminder data;
+  final Function onDismissed;
   final bool inverseStyle;
-  const ReminderItem({super.key, required this.data, required this.inverseStyle});
+  const ReminderItem({super.key, required this.data, this.inverseStyle = false, required this.onDismissed});
 
 
   @override
@@ -16,7 +17,9 @@ class ReminderItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Dismissible(
           direction: DismissDirection.endToStart,
-          onDismissed: (direction) {},
+          onDismissed: (direction) {
+            onDismissed(data.id);
+          },
           key: Key(data.id.toString()),
           background: Container(
             decoration: BoxDecoration(
@@ -50,8 +53,8 @@ class ReminderItem extends StatelessWidget {
                       child: Image.network(
                         data.imageUrl,
                         fit: BoxFit.cover,
-                        height: 75,
-                        width: 75,
+                        height: 100,
+                        width: 100,
                       )),
                 ),
                 Expanded(

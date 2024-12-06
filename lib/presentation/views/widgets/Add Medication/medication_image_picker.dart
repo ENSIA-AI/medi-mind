@@ -47,7 +47,6 @@ class MedicationImagePicker extends StatelessWidget {
                       return value != null
                           ? ClipRRect(
                               borderRadius: BorderRadius.circular(24),
-
                               child: Image.file(
                                 File(value), // Show picked image
                                 fit: BoxFit.cover,
