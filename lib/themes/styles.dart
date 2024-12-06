@@ -25,6 +25,10 @@ TextStyle BLUE_REGULAR_TEXT_STYLE = const TextStyle(
 TextStyle BEIGE_SUBHEADING_TEXT_STYLE =
     const TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: TEXT_BEIGE);
 
+
+TextStyle WHITE_SUBHEADING_TEXT_STYLE =
+    const TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: TEXT_BEIGE);
+
         
 TextStyle LOGO_NAME_TEXT_STYLE = const TextStyle(
           fontSize: 40,
