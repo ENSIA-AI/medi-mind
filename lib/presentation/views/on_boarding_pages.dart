@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medi_mind/presentation/views/welcome_screen.dart';
 import 'package:medi_mind/presentation/views/widgets/common/logo_name_widget.dart';
 import 'package:medi_mind/presentation/views/widgets/Boarding%20Screens/on_boarding_page_info.dart';
 import 'package:medi_mind/themes/colors.dart';
@@ -97,8 +98,7 @@ class _OnBoardingPagesState extends State<OnBoardingPages> {
                               foregroundColor: Colors.white,
                               backgroundColor: PRIMARY_BLUE, elevation: 5),
                           onPressed: (){
-                            Navigator.pushReplacementNamed(
-          context, '/main');
+                            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => WelcomeScreen()));
                           },
                           child: Text("Get Started", style: TextStyle(
                             fontSize: 20,

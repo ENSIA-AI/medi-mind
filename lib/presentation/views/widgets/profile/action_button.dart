@@ -22,11 +22,13 @@ class ActionButton extends StatelessWidget {
         onPressed: onPressed,
         style: style,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
-          child: Text(
-            text,
-            style: textStyle,
-            textAlign: TextAlign.center, // Ensure the text is centered
+          padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+          child: Center(
+            child: Text(
+              text,
+              style: textStyle,
+              textAlign: TextAlign.center, // Ensure the text is centered
+            ),
           ),
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medi_mind/presentation/views/main_app_screen.dart';
 import 'package:medi_mind/presentation/views/widgets/common/action_button.dart';
 import 'package:medi_mind/presentation/views/widgets/common/logo_name_widget.dart';
 import 'package:medi_mind/themes/colors.dart';
@@ -57,7 +58,9 @@ class WelcomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                          onPressed: (){},
+                          onPressed: (){
+                            Navigator.of(context).pushReplacementNamed('/main');
+                          },
                           child: Text("Skip", style: TextStyle(
                               fontSize: 16,
                               color: Colors.grey

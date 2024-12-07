@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 20),
                 // The report of the page
-                Text('Your Progress:', style: BLUE_SUBHEADING_TEXT_STYLE),
+                InkWell(child: Text('Week Progress:', style: BLUE_SUBHEADING_TEXT_STYLE)),
                 const SizedBox(height: 10),
                 
                 Row(
@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 // The upcoming reminder
-                const SizedBox(height: 20),
+                const SizedBox(height: 50),
                 Text('Today upcoming reminder:',
                     style: BLUE_SUBHEADING_TEXT_STYLE),
                 const SizedBox(height: 10),

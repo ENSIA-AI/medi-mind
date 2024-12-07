@@ -34,7 +34,11 @@ class ProfileTile extends StatelessWidget {
                   ),
                 ),
             title: Text( title,
-            style: BLUE_SUBHEADING_TEXT_STYLE, ),
+            style: TextStyle(
+              color: PRIMARY_BLUE,
+              fontWeight: FontWeight.bold,
+              fontSize: 22
+            ), ),
             trailing: Icon(Icons.arrow_forward_ios_rounded, color: PRIMARY_BLUE, size:20.0),
             onTap: onTap,  
                 ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medi_mind/presentation/views/widgets/Settings/switch_settings.dart';
-import 'package:medi_mind/presentation/views/widgets/app_barV2.dart';
+import 'package:medi_mind/presentation/views/widgets/common/app_barV2.dart';
 import 'package:medi_mind/themes/colors.dart';
 
 class NotificationSettingsScreen extends StatefulWidget {
@@ -25,7 +25,7 @@ class _NotificationSettingsScreenState
     return Scaffold(
       appBar: const AppBarV2(pageTitle: "Notification Setting"),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(10.0),
         child: ListView(
           children: [
             SwitchTile(
@@ -94,10 +94,10 @@ class _NotificationSettingsScreenState
                       const Text(
                         "Remind me each",
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 18,
                           color: PRIMARY_BLUE,
                           fontWeight: FontWeight.w500,
-                          fontFamily: 'LeagueSpartan',
+                          fontFamily: 'Spartan League',
                         ),
                       ),
                       const Spacer(),
@@ -115,7 +115,8 @@ class _NotificationSettingsScreenState
                             child: Text(
                               value,
                               style: const TextStyle(
-                                fontFamily: 'LeagueSpartan',
+                                fontSize: 16,
+                                fontFamily: 'Spartan League',
                               ),
                             ),
                           );
@@ -129,7 +130,7 @@ class _NotificationSettingsScreenState
                           fontSize: 14,
                           color: PRIMARY_BLUE,
                           fontWeight: FontWeight.w500,
-                          fontFamily: 'LeagueSpartan',
+                          fontFamily: 'Spartan League',
                         ),
                       ),
                     ],
@@ -148,10 +149,10 @@ class _NotificationSettingsScreenState
                       const Text(
                         "Notification Sound",
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 20,
                           color: PRIMARY_BLUE,
                           fontWeight: FontWeight.w600,
-                          fontFamily: 'LeagueSpartan',
+                          fontFamily: 'Spartan League',
                         ),
                       ),
                       const Spacer(),
@@ -165,12 +166,13 @@ class _NotificationSettingsScreenState
                             color: SECONDARY_BURGUNDY,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            fontFamily: 'LeagueSpartan',
+                            fontFamily: 'Spartan League',
                           ),
                         ),
                       ),
                     ],
                   ),
+                  Divider(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -222,8 +224,8 @@ class _NotificationSettingsScreenState
             Text(
               description,
               style: const TextStyle(
-                fontSize: 12,
-                fontFamily: 'LeagueSpartan',
+                fontSize: 14,
+                fontFamily: 'Spartan League',
               ),
             ),
           ],

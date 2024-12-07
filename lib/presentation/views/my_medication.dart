@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medi_mind/presentation/views/add_medication_form.dart';
 import 'package:medi_mind/presentation/views/widgets/My Medication/MedCard.dart';
 import 'package:medi_mind/data/model/medication.dart';
 import 'package:medi_mind/themes/styles.dart';
@@ -22,7 +23,9 @@ class MedicationList extends StatelessWidget {
                                                         shape: RoundedRectangleBorder(
                                                           borderRadius: BorderRadius.circular(30),
                                                                                      ),
-                                                        onPressed: () {}, //navigate to the add medication page
+                                                        onPressed: () {
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddMedicationPage()));
+                                                        }, //navigate to the add medication page
                                                         icon: const Icon(Icons.add, color: Colors.white, size: 25),
                                                         label:  Text("Add", style: WHITE_SUBHEADING_TEXT_STYLE,),
                                                       ),

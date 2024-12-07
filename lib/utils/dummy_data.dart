@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medi_mind/data/model/intake.dart';
+import 'package:medi_mind/data/model/medication.dart';
 import 'package:medi_mind/data/model/reminder.dart';
 
 List<String> days = ['Mon', 'Tus', 'Wes', 'The', 'Fri', 'Sat', 'Sun'];
@@ -151,5 +152,59 @@ List<Reminder> reminders = [
       IntakeData(time: TimeOfDay(hour: 18, minute: 00), dose: 1)
     ],
     selectedDays: [1, 3, 5]
+  ),
+];
+
+
+final List<Medication> medications_dummy = [
+  Medication(
+    id: 1,
+    name: "Paracetamol",
+    unit: "500 mg",
+    imgPath:
+        "https://cdn11.bigcommerce.com/s-n6ynrx6s4d/images/stencil/1280x1280/products/2377/4521/ibuprofen_tabs__60250.1648242731.jpg?c=1",
+    reminderDays: 1,
+    details: "Take after meals to reduce fever and pain.",
+    endDate: DateTime.now().add(Duration(days: 30)),
+  ),
+  Medication(
+    id: 2,
+    name: "Ibuprofen",
+    unit: "200 mg",
+    imgPath:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlT_gsHEcZdifnU03axBcNJMq09XCOhULxSA&s",
+    reminderDays: 3,
+    details: "Use for inflammation and mild pain.",
+    endDate: null,
+  ),
+  Medication(
+    id: 3,
+    name: "Amoxicillin",
+    unit: "250 mg",
+    imgPath:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfQiqjfcF5w-N9POXEkHk4tz57ZtMKoSkL-g&s",
+    reminderDays: 7,
+    details: "Complete the full course as prescribed.",
+    endDate: DateTime.now().add(Duration(days: 14)),
+  ),
+  Medication(
+    id: 4,
+    name: "Vitamin D",
+    unit: "1000 IU",
+    imgPath:
+        "https://assets.truemeds.in/Images/ProductImage/TM-INON2-003968/INSULATARD-HUMAN-40-IU-INJECTION-10-ML_1.webp?width=320",
+    reminderDays: 2,
+    details: "Take once daily with meals to improve bone health.",
+    endDate: DateTime.now().add(Duration(days: 60)),
+  ),
+  Medication(
+    id: 5,
+    name: "Cetirizine",
+    unit: "10 mg",
+    imgPath:
+        "https://www.medicinedirect.co.uk/media/catalog/product/cache/8bf3693ed458c257f5171ffffa4e8921/p/a/paracetamol_500_tablet_buy_medicine_direct_uk_parmacy_10.jpg",
+    reminderDays: 5,
+    details: "For allergy relief. Use as needed.",
+    endDate: null,
   ),
 ];

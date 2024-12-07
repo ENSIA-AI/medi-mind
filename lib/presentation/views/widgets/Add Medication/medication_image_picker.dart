@@ -45,13 +45,10 @@ class MedicationImagePicker extends StatelessWidget {
                     valueListenable: imageController,
                     builder: (context, value, child) {
                       return value != null
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(24),
-                              child: Image.file(
-                                File(value), // Show picked image
-                                fit: BoxFit.cover,
-                              ),
-                            )
+                          ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset("assets/images/pills_add_medication_pic.png"),
+                          )
                           : Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Image.asset("assets/images/pills_add_medication_pic.png"),

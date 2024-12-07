@@ -11,7 +11,7 @@ import 'package:medi_mind/presentation/views/widgets/Add%20Medication/medication
 import 'package:medi_mind/presentation/views/widgets/common/action_button.dart';
 import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/themes/styles.dart';
-import 'package:path/path.dart';
+import 'package:medi_mind/utils/toast_message.dart';
 import 'package:provider/provider.dart';
 
 class AddMedicationPage extends StatelessWidget {
@@ -251,6 +251,7 @@ class AddMedicationPage extends StatelessWidget {
             onPressed: () async {
               bool result = await provider.nextStep();
               if (result && provider.currentStep == 3) {
+                ShowToastMessage("Added Medication Successfully!");
                 Navigator.of(context).pushReplacementNamed('/main');
               }
             },

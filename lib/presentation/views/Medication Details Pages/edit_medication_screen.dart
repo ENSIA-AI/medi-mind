@@ -65,6 +65,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBarV2(pageTitle: "Edit Medication"),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -94,7 +95,9 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                 valueListenable: isModifiedNotifier,
                 builder: (context, isModified, child) {
                   return isModified
-                      ? ActionButton(text: "Save", onPressed: (){}, style: PRIMARY_ACTION_BUTTON_STYLE, textStyle: SECONDARY_ACTION_BUTTON_TEXT_STYLE)
+                      ? ActionButton(text: "Save", onPressed: (){
+                        Navigator.pop(context);
+                      }, style: PRIMARY_ACTION_BUTTON_STYLE, textStyle: SECONDARY_ACTION_BUTTON_TEXT_STYLE)
                       : SizedBox.shrink(); // Do not show the button if not modified
                 },
               ),

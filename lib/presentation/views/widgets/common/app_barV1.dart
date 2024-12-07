@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medi_mind/presentation/views/notification_screen.dart';
+import 'package:medi_mind/presentation/views/settings_screen.dart';
 import 'package:medi_mind/themes/colors.dart';
 
 class AppBarV1 extends StatelessWidget implements PreferredSizeWidget {
@@ -27,7 +28,7 @@ class AppBarV1 extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: GestureDetector(
               onTap: () {
-                debugPrint("Settings icon tapped");
+                Navigator.of(context).push(MaterialPageRoute(builder:(context) => SettingsScreen(),));
               },
               child: const Icon(
                 Icons.settings,

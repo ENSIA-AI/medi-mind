@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medi_mind/presentation/views/notification_settings.dart';
 import 'package:medi_mind/presentation/views/widgets/Settings/SettingTile.dart';
 import 'package:medi_mind/presentation/views/widgets/Settings/switch_settings.dart';
-import 'package:medi_mind/presentation/views/widgets/app_barV2.dart';
+import 'package:medi_mind/presentation/views/widgets/common/app_barV2.dart';
 import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/themes/styles.dart';
 

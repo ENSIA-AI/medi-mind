@@ -24,14 +24,7 @@ class DaySelector extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Select days of the week:',
-          style: TextStyle(
-            fontSize: 20,
-            color: PRIMARY_BLUE,
-          ),
-        ),
-        SizedBox(height: 16.0),
+        
         Wrap(
           spacing: 5.0,
           runSpacing: 8.0,

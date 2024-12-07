@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:medi_mind/data/model/medication.dart';
 import 'package:medi_mind/presentation/views/Medication%20Details%20Pages/edit_medication_screen.dart';
+import 'package:medi_mind/presentation/views/Medication%20Details%20Pages/edit_schedule_screen.dart';
 import 'package:medi_mind/presentation/views/widgets/Medication%20Details/medication_detail_option.dart';
 import 'package:medi_mind/presentation/views/widgets/common/action_button.dart';
 import 'package:medi_mind/presentation/views/widgets/common/app_barV2.dart';
@@ -11,9 +12,10 @@ import 'package:medi_mind/themes/styles.dart';
 import 'package:medi_mind/utils/binary_selected_days.dart';
 
 class MedicationDetails extends StatefulWidget {
-
+  final Medication medicationData;
   MedicationDetails({
-    super.key,
+    
+    super.key, required this.medicationData,
   });
 
   @override
@@ -21,15 +23,13 @@ class MedicationDetails extends StatefulWidget {
 }
 
 class _MedicationDetailsState extends State<MedicationDetails> {
-  final Medication medicationData = Medication(
-    reminderDays: 16, id: 1, name: "Paracetamol 500mg", unit: "Pills(s)"
-  );
+  
   late List<Reminder_> associatedIntakes = [
     Reminder_(id: 1, medicationId: 1, time: "10:10", dose: 2),
     Reminder_(id: 1, medicationId: 1, time: "10:10", dose: 2),
     Reminder_(id: 1, medicationId: 1, time: "10:10", dose: 2)
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,11 +39,11 @@ class _MedicationDetailsState extends State<MedicationDetails> {
         child: Column(
           children: [
             MedicationDetailOption(
-              title: medicationData.name,
+              title: widget.medicationData.name,
               description: "Manage medication data.",
               icon: Icon(Icons.medication),
               onPressed: (){
-                Navigator.of(context).push(MaterialPageRoute(builder:(context) => EditMedicationScreen(medicationData: medicationData,)));
+                Navigator.of(context).push(MaterialPageRoute(builder:(context) => EditMedicationScreen(medicationData: widget.medicationData,)));
 
               },
             ),
@@ -52,9 +52,11 @@ class _MedicationDetailsState extends State<MedicationDetails> {
             ),
             MedicationDetailOption(
               title: "Schedule",
-              description: "${associatedIntakes.length} per day - ${countSetBits(medicationData.reminderDays)} per week - No end date",
+              description: "${associatedIntakes.length} per day - ${countSetBits(widget.medicationData.reminderDays)} per week - No end date",
               icon: Icon(Icons.calendar_month),
-              onPressed: (){},
+              onPressed: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditScheduleScreen(medicationData: widget.medicationData, medicationReminders: associatedIntakes,)));
+              },
             ),
             Spacer(),
             Transform.scale(

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medi_mind/main.dart';
 import 'package:medi_mind/presentation/bloc/bottom_nav_bloc.dart';
 import 'package:medi_mind/presentation/views/widgets/Bottom%20Navigation/bottom_nav_item.dart';
 import 'package:medi_mind/presentation/views/widgets/common/app_barV1.dart';
@@ -23,6 +24,16 @@ class _MainAppScreenState extends State<MainAppScreen> {
   void initState() {
     super.initState();
     _currentPageController = PageController();
+
+    // Schedule a test notification after a short delay to ensure everything is set up
+  Future.delayed(const Duration(seconds: 90), () {
+    try {
+      showMedicationNotification("Aspirin 50mg");
+      print('Medication notification scheduled');
+    } catch (e) {
+      print('Failed to show medication notification: $e');
+    }
+  });
   }
 
   @override
@@ -36,7 +47,9 @@ class _MainAppScreenState extends State<MainAppScreen> {
     return BlocBuilder<BottomNavCubit, int>(
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBarV1(),
+          appBar: AppBarV1(
+            
+          ),
           bottomNavigationBar: BottomNavigationBar(
               
               unselectedIconTheme: const IconThemeData(color: PRIMARY_BLUE),

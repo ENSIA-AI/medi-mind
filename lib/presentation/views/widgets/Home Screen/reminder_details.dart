@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:medi_mind/data/model/medication.dart';
 import 'package:medi_mind/data/model/reminder.dart';
+import 'package:medi_mind/presentation/views/Medication%20Details%20Pages/medication_details.dart';
 import 'package:medi_mind/presentation/views/widgets/common/reminder_item.dart';
 import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/themes/styles.dart';
@@ -76,7 +78,7 @@ class MedDetails extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       // will be a navigation page
-                      print('See More tapped');
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => MedicationDetails(medicationData: Medication(reminderDays: 12, id: 2, name: "Ibuprofen", unit: "Pill(s)"))));
                     },
                     child: Text(
                       "See More",

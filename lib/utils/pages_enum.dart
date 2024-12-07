@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:medi_mind/data/model/medication.dart';
+import 'package:medi_mind/presentation/views/local_profile.dart';
+import 'package:medi_mind/presentation/views/my_medication.dart';
 import 'package:medi_mind/presentation/views/patient_home.dart';
 import 'package:medi_mind/presentation/views/schedule_screen.dart';
+import 'package:medi_mind/presentation/views/settings_screen.dart';
 import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/utils/dates.dart';
+import 'package:medi_mind/utils/dummy_data.dart';
 // This page will be changed Later
 
 const HOMEPAGE_INDEX = 0;
@@ -12,41 +17,29 @@ const SETTINGS_PAGE_INDEX = 3;
 
 dynamic PAGES_LIST = [
   HomeScreen(),
-  const Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-    Text("This is My Medication !"),
-    SizedBox(
-      height: 80,
-    ),
-    Icon(Icons.add_alert_rounded)
-  ]),
+  MedicationList(meds: medications_dummy),
   ScheduleScreen(),
   
-  const Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-    Text("This is My Settings !"),
-    SizedBox(
-      height: 80,
-    ),
-    Icon(Icons.settings)
-  ]),
+  LocalProfile(),
 ];
 
 const List<Map> onBoardingInfo = [
   {
     "imageUrl": "assets/images/onBoarding1.png",
-    "title": "Start your journey!",
+    "title": "Stay on Track",
     "description":
-        "MediMind Helps you eat your breakfast, do your SWE homework and most importantly can do simplex"
+        "MediMind helps you manage your medications by setting timely reminders, so you never forget a dose."
   },
   {
     "imageUrl": "assets/images/onBoarding2.png",
-    "title": "Conquer the world!",
+    "title": "Track Your Progress",
     "description":
-        "MediMind Helps you eat your dinner, do your OR quiz and most importantly malia dont read this"
+        "Easily track your medication progress. Mark your doses as taken, skipped, or missed, and stay updated with your health goals."
   },
   {
     "imageUrl": "assets/images/onBoarding3.png",
-    "title": "Find your goals!",
+    "title": "Get Insights",
     "description":
-        "MediMind Helps you eat your dinner, do your OR quiz and most importantly malia dont read this"
+        "Get personalized insights and overviews of your medication schedules. "
   }
 ];

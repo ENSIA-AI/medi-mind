@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:medi_mind/presentation/views/privacy_policy.dart';
+import 'package:medi_mind/presentation/views/report_screen.dart';
+import 'package:medi_mind/presentation/views/settings_screen.dart';
 import 'package:medi_mind/presentation/views/widgets/profile/action_button.dart';
 import 'package:medi_mind/themes/styles.dart';
 import 'package:medi_mind/presentation/views/widgets/profile/Tile.dart';
 
 
-class logged_out_profile extends StatelessWidget {
-  const logged_out_profile({super.key});
+class LocalProfile extends StatelessWidget {
+  const LocalProfile({super.key});
 
 
   @override
@@ -49,10 +52,18 @@ class logged_out_profile extends StatelessWidget {
         Expanded(
           child: ListView(
               children: [
-                ProfileTile(title: 'Report', path: 'assets/icons/Report.svg', onTap: (){},),
-                ProfileTile(title: 'Privacy Policy', path: 'assets/icons/Privacy.svg', onTap: (){},),
-                ProfileTile(title: 'Settings', path: 'assets/icons/Settings.svg', onTap: (){},),
-                ProfileTile(title: 'About Us', path: 'assets/icons/AboutUs.svg', onTap: (){},),
+                ProfileTile(title: 'Report', path: 'assets/icons/Report.svg', onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => ReportScreen()));
+                },),
+                ProfileTile(title: 'Privacy Policy', path: 'assets/icons/Privacy.svg', onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => PrivacyPolicy()));
+                },),
+                ProfileTile(title: 'Settings', path: 'assets/icons/Settings.svg', onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingsScreen()));
+                },),
+                ProfileTile(title: 'About Us', path: 'assets/icons/AboutUs.svg', onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutDialog()));
+                },),
               ],
             ),
         ),
