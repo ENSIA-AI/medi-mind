@@ -1,105 +1,132 @@
-  import 'package:flutter/material.dart';
+import 'dart:typed_data';
 
-  import 'package:medi_mind/data/model/intake.dart';
-  import 'package:medi_mind/data/model/reminder.dart';
+import 'package:flutter/material.dart';
+import 'package:medi_mind/data/dbhelper/db_helper.dart';
+
+import 'package:medi_mind/data/model/intake.dart';
+import 'package:medi_mind/data/model/reminder.dart';
+import 'package:medi_mind/presentation/views/report_screen.dart';
 import 'package:medi_mind/utils/toast_message.dart';
-  import 'package:uuid/uuid.dart';
-  class MedicationProvider extends ChangeNotifier {
-    final PageController pageController = PageController(initialPage: 0);
-    int currentStep = 0;
-    final medicationNameController = TextEditingController();
-    String? imagePath;
-    Set<int> selectedDays = {};
-    String? selectedUnit;
-    int timesPerDay = 1;
-    final List<IntakeData> intakeDataList =
-        List.generate(6, (_) => IntakeData(time: TimeOfDay.now(), dose: 1));
+import 'package:path/path.dart';
+import 'package:uuid/uuid.dart';
 
+class MedicationProvider extends ChangeNotifier {
+  final PageController pageController = PageController(initialPage: 0);
+  int currentStep = 0;
+  final medicationNameController = TextEditingController();
+  Uint8List? image;
+  Set<int> selectedDays = {};
+  String? selectedUnit;
+  int timesPerDay = 1;
+  final List<IntakeData> intakeDataList =
+      List.generate(6, (_) => IntakeData(time: TimeOfDay.now(), dose: 1));
 
-    void updateImagePath(String? path) {
-      imagePath = path;
+  void updateImage(Uint8List? img) {
+    image = img;
+    notifyListeners();
+  }
+
+  void updateSelectedDays(Set<int> days) {
+    selectedDays = days;
+    notifyListeners();
+  }
+
+  void updateSelectedUnit(String? unit) {
+    selectedUnit = unit;
+    notifyListeners();
+  }
+
+  void updateTimesPerDay(int times) {
+    timesPerDay = times;
+    notifyListeners();
+  }
+
+  void updateIntakeData(int index, IntakeData data) {
+    intakeDataList[index] = data;
+    notifyListeners();
+  }
+
+  Future<bool> nextStep() async {
+    if (currentStep < 3) {
+      currentStep++;
+      pageController.nextPage(
+          duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+      notifyListeners();
+      return true;
+    } else {
+      print("in else");
+      currentStep++;
+      return await finish();
+    }
+  }
+
+  void previousStep() {
+    if (currentStep > 0) {
+      currentStep--;
+      pageController.previousPage(
+          duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
       notifyListeners();
     }
-
-    void updateSelectedDays(Set<int> days) {
-      selectedDays = days;
-      notifyListeners();
-    }
-
-    void updateSelectedUnit(String? unit) {
-      selectedUnit = unit;
-      notifyListeners();
-    }
-
-    void updateTimesPerDay(int times) {
-      timesPerDay = times;
-      notifyListeners();
-    }
-
-    void updateIntakeData(int index, IntakeData data) {
-      intakeDataList[index] = data;
-      notifyListeners();
-    }
-
-    Future<bool> nextStep() async {
-      if (currentStep < 3) {
-        currentStep++;
-        pageController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
-        notifyListeners();
-        return true;
-      }
-      else{
-        return await finish();
-      }
-    }
-
-    void previousStep() {
-        if (currentStep > 0) {
-        currentStep--;
-        pageController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
-        notifyListeners();
-      }
-    }
-
-    
+  }
 
   // Initialize a UUID generator
 
-
   Future<bool> finish() async {
-    var uuid = Uuid();
-    
-    
-    if (medicationNameController.text.isEmpty || selectedUnit == null || selectedDays.isEmpty) {
-      // Show an error or return early if the data is incomplete
+    print("in finish");
+    try {
+      // 2. Prepare the medication data
+      final dbHelper = DbHelper();
+      final db = await dbHelper.database;
+      print("got db");
+
+      Map<String, dynamic> medicationData = {
+        'name': medicationNameController.text,
+        'unit': selectedUnit!,
+        'img': image ?? '',
+        'details': '', // Add details field if needed
+        'startDate':
+            DateTime.now().toIso8601String(), // Assuming start date is now
+        'endDate': null, // Modify as needed
+        'reminderDays': constructReminderDays(selectedDays)
+      };
+
+      // 3. Insert medication into the database
+      int medicationId = await db.insert('medications', medicationData);
+      print("inserted ${medicationId}");
+      // 4. Insert intake data for the medication
+      for (int i = 0; i < timesPerDay; i++) {
+        final intake = intakeDataList[i];
+        await db.insert('intakes', {
+          'medicationId': medicationId,
+          'time': formatTimeOfDay(intake.time),
+          'dose': intake.dose,
+        });
+      }
+
+      // 5. Success
+      print("hurray");
+      return true;
+    } catch (e) {
+      // 6. Handle errors
+      print('Error saving medication: $e');
+      currentStep--;
       return false;
     }
-    
+  }
+}
 
-    
-    String reminderId = uuid.v4(); // Generate a UUIDv4
-    
-    
-    
-    Reminder reminder = Reminder(
-      id: reminderId,
-      name: medicationNameController.text,
-      frequency: timesPerDay,
-      form: selectedUnit ?? "Pill(s)",
-      selectedDays: selectedDays.toList(),
-      imageUrl: imagePath!, // Assuming image is selected
-      intakes: List.generate(timesPerDay, (index) => IntakeData(
-        time: intakeDataList[index].time,
-        dose: intakeDataList[index].dose,
-      )),
-    );
+String formatTimeOfDay(TimeOfDay time) {
+  final String hour = time.hour.toString().padLeft(2, '0');
+  final String minute = time.minute.toString().padLeft(2, '0');
+  return '$hour:$minute';
+}
 
-    print((reminder.toJson()));
-    
-    
-    notifyListeners(); 
+int constructReminderDays(Set<int> days) {
+  int reminderDays = 0;
 
-    return true;
+  for (int day in days) {
+    reminderDays |= (1 << day);
   }
 
-  }
+  return reminderDays;
+}

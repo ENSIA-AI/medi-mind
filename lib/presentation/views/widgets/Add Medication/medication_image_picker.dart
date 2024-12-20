@@ -1,14 +1,15 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medi_mind/themes/colors.dart';
 
-
 class MedicationImagePicker extends StatelessWidget {
-  final ValueNotifier<String?> imageController;
+  final ValueNotifier<Uint8List?> imageController;
   final Function onImageSelected;
-  const MedicationImagePicker({Key? key, required this.imageController, required this.onImageSelected})
+  const MedicationImagePicker(
+      {Key? key, required this.imageController, required this.onImageSelected})
       : super(key: key);
 
   Future<void> _pickImage() async {
@@ -17,7 +18,7 @@ class MedicationImagePicker extends StatelessWidget {
         await picker.pickImage(source: ImageSource.gallery); // Open gallery
 
     if (pickedFile != null) {
-      onImageSelected(pickedFile.path); // Update controller with image path
+      onImageSelected(await pickedFile.readAsBytes()); // Update controller with image
     }
   }
 
@@ -36,23 +37,24 @@ class MedicationImagePicker extends StatelessWidget {
                 child: Container(
                   width: 120,
                   height: 120,
+                  clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                     color: PRIMARY_BLUE,
                     borderRadius: BorderRadius.circular(24),
-
                   ),
-                  child: ValueListenableBuilder<String?>(
+                  child: ValueListenableBuilder<Uint8List?>(
                     valueListenable: imageController,
                     builder: (context, value, child) {
                       return value != null
-                          ? Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset("assets/images/pills_add_medication_pic.png"),
-                          )
+                          ? Image.memory(
+                              imageController.value ?? Uint8List(1),
+                              fit: BoxFit.cover,
+                            )
                           : Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset("assets/images/pills_add_medication_pic.png"),
-                          );
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.asset(
+                                  "assets/images/pills_add_medication_pic.png"),
+                            );
                     },
                   ),
                 ),
@@ -67,7 +69,9 @@ class MedicationImagePicker extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 20,
                     backgroundColor: TEXT_BEIGE,
-                    child: SvgPicture.asset("assets/icons/modify_icon.svg",),
+                    child: SvgPicture.asset(
+                      "assets/icons/modify_icon.svg",
+                    ),
                   ),
                 ),
               ),
@@ -75,7 +79,6 @@ class MedicationImagePicker extends StatelessWidget {
           ),
 
           // Label Text
-
         ],
       ),
     );

@@ -55,7 +55,7 @@ class AddMedicationPage extends StatelessWidget {
                 ),
 
                 // Bottom Navigation Buttons
-                _buildBottomNavigation(medicationProvider,context),
+                _buildBottomNavigation(medicationProvider, context),
               ],
             );
           },
@@ -71,8 +71,8 @@ class AddMedicationPage extends StatelessWidget {
         child: Column(
           children: [
             MedicationImagePicker(
-              imageController: ValueNotifier(provider.imagePath),
-              onImageSelected: provider.updateImagePath,
+              imageController: ValueNotifier(provider.image),
+              onImageSelected: provider.updateImage,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -220,7 +220,9 @@ class AddMedicationPage extends StatelessWidget {
             child: Text(
               "On what days would you like to be reminded?",
               style: TextStyle(
-                  fontSize: 20, color: PRIMARY_BLUE, fontWeight: FontWeight.bold),
+                  fontSize: 20,
+                  color: PRIMARY_BLUE,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           const SizedBox(height: 20),
@@ -233,7 +235,8 @@ class AddMedicationPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNavigation(MedicationProvider provider, BuildContext context) {
+  Widget _buildBottomNavigation(
+      MedicationProvider provider, BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16.0),
       child: Row(
@@ -250,8 +253,10 @@ class AddMedicationPage extends StatelessWidget {
             text: provider.currentStep == 3 ? "Finish" : "Next",
             onPressed: () async {
               bool result = await provider.nextStep();
-              if (result && provider.currentStep == 3) {
+              print(provider.currentStep);
+              if (result && provider.currentStep == 4) {
                 ShowToastMessage("Added Medication Successfully!");
+                
                 Navigator.of(context).pushReplacementNamed('/main');
               }
             },

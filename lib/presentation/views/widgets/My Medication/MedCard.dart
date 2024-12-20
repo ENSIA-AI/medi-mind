@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:medi_mind/presentation/views/Medication%20Details%20Pages/medication_details.dart';
 import 'package:medi_mind/presentation/views/widgets/common/progress_circle.dart';
@@ -36,9 +38,9 @@ class MedCard extends StatelessWidget {
               //medicine picture
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: medication.imgPath != null
-                    ? Image.network(
-                        medication.imgPath ?? "",
+                child: medication.img != null 
+                    ? Image.memory(
+                        medication.img !,
                         fit: BoxFit.cover,
                         width: 70,
                         height: 70,
@@ -46,7 +48,11 @@ class MedCard extends StatelessWidget {
                     : Container(
                         width: 70,
                         height: 70,
-                        child: Icon(Icons.medication),
+                        child: Icon(
+                          Icons.medication,
+                          size: 30,
+                          color: Colors.white,
+                        ),
                       ),
               ),
 

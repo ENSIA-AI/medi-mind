@@ -7,6 +7,5 @@ class ReminderRepository {
   ReminderRepository(this.dbHelper);
 
   Future<void> saveReminder(Reminder reminder) async {
-    await dbHelper.insertReminder(reminder);
   }
 }

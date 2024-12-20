@@ -30,7 +30,7 @@ class NoReminder extends StatelessWidget {
             SizedBox(height: 10),
             Text(
               "No upcoming reminder for the day",
-              style: TextStyle(color: TEXT_BEIGE, fontSize: 20 , fontWeight:FontWeight.w600),
+              style: TextStyle(color: Colors.white, fontSize: 20 , fontWeight:FontWeight.w600),
             ),SizedBox(height: 10),
                     ],
                   ),

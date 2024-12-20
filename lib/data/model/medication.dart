@@ -1,9 +1,11 @@
+import 'dart:typed_data';
+
 class Medication {
   final int id; // Unique ID for the medication
   final String name; // Name of the medication
   final String unit; // Unit (e.g., mg, tablet)
-  final String? imgPath; // Path to the medication picture
-  final int reminderDays; // Optional days (comma-separated, e.g., "Mon,Wed,Fri")
+  final Uint8List? img; // Path to the medication picture
+  final int reminderDays; // binary rep of the week days starting from sunday
   final String? details; // Optional additional details
   final DateTime? endDate; // Optional end date for the medication
 
@@ -12,7 +14,7 @@ class Medication {
     required this.id,
     required this.name,
     required this.unit,
-    this.imgPath,
+    this.img,
     this.details,
     this.endDate,
   });
@@ -20,28 +22,26 @@ class Medication {
   // Serialization (to map)
   Map<String, dynamic> toMap() {
     return {
-      'medicine_id': id,
-      'medicine_name': name,
+      'id': id,
+      'name': name,
       'unit': unit,
-      'img_path': imgPath,
-      'reminder_days' : reminderDays,
-      'medicine_details': details,
-      'medicine_end_date': endDate?.toIso8601String(),
+      'img': img,
+      'reminderDays': reminderDays,
+      'details': details,
+      'endDate': endDate?.toIso8601String(),
     };
   }
 
   // Deserialization (from map)
   factory Medication.fromMap(Map<String, dynamic> map) {
     return Medication(
-      id: map['medicine_id'],
-      name: map['medicine_name'],
+      id: map['id'],
+      name: map['name'],
       unit: map['unit'],
-      reminderDays: map['reminder_days'],
-      imgPath: map['img_path'],
-      details: map['medicine_details'],
-      endDate: map['medicine_end_date'] != null
-          ? DateTime.parse(map['medicine_end_date'])
-          : null,
+      reminderDays: map['reminderDays'],
+      img: map['img'],
+      details: map['details'],
+      endDate: map['endDate'] != null ? DateTime.parse(map['endDate']) : null,
     );
   }
 }
@@ -51,7 +51,6 @@ class Reminder_ {
   final int medicationId; // Foreign key linking to a medication
   final String time; // Reminder time in "HH:mm" format
   final int dose; // Dose to take at this reminder
-  
 
   Reminder_({
     required this.id,
@@ -63,20 +62,20 @@ class Reminder_ {
   // Serialization (to map)
   Map<String, dynamic> toMap() {
     return {
-      'reminder_id': id,
-      'medicine_id': medicationId,
-      'reminder_time': time,
-      'reminder_dose': dose,
+      'id': id,
+      'medicationId': medicationId,
+      'time': time,
+      'dose': dose,
     };
   }
 
   // Deserialization (from map)
   factory Reminder_.fromMap(Map<String, dynamic> map) {
     return Reminder_(
-      id: map['reminder_id'],
-      medicationId: map['medicine_id'],
-      time: map['reminder_time'],
-      dose: map['reminder_dose'],
+      id: map['id'],
+      medicationId: map['medicationId'],
+      time: map['time'],
+      dose: map['dose'],
     );
   }
 }
@@ -85,34 +84,33 @@ class Progress {
   final int id; // Unique ID for the progress entry
   final int reminderId; // Foreign key linking to a reminder
   final DateTime? checkedAt; // Timestamp of when the user took action
-  final String status; // "Taken", "Skipped", "Missed", "Late"
+  final bool isTaken; // 1 : "Done" otherwise "Skipped"
 
   Progress({
     required this.id,
     required this.reminderId,
     this.checkedAt,
-    required this.status,
+    required this.isTaken,
   });
 
   // Serialization (to map)
   Map<String, dynamic> toMap() {
     return {
-      'progress_id': id,
-      'reminder_id': reminderId,
-      'checked_at': checkedAt?.toIso8601String(),
-      'status': status,
+      'id': id,
+      'reminderId': reminderId,
+      'checkedAt': checkedAt?.toIso8601String(),
+      'isTaken': isTaken,
     };
   }
 
   // Deserialization (from map)
   factory Progress.fromMap(Map<String, dynamic> map) {
     return Progress(
-      id: map['progress_id'],
-      reminderId: map['reminder_id'],
-      checkedAt: map['checked_at'] != null
-          ? DateTime.parse(map['checked_at'])
-          : null,
-      status: map['status'],
+      id: map['id'],
+      reminderId: map['reminderId'],
+      checkedAt:
+          map['checkedAt'] != null ? DateTime.parse(map['checkedAt']) : null,
+      isTaken: map['isTaken'],
     );
   }
 }

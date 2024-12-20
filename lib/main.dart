@@ -21,7 +21,7 @@ void main() async {
   // Request notification permissions
   try {
     var notificationStatus = await Permission.notification.request();
-    
+
     if (notificationStatus.isGranted) {
       print('Notification permissions granted');
     } else {
@@ -42,8 +42,6 @@ void main() async {
 
   // Run the app
   runApp(const MainApp());
-
-  
 }
 
 // Comprehensive notification initialization function
@@ -71,9 +69,8 @@ Future<void> initializeNotifications() async {
 
   // Create the channel on the device
   final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
-      flutterLocalNotificationsPlugin
-          .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>();
+      flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>();
 
   await androidImplementation?.createNotificationChannel(channel);
 
@@ -135,18 +132,20 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: materialTheme,
-      routes: {
-        '/': (context) => SplashScreen(),
-        '/onboarding': (context) => OnBoardingPages(),
-        '/main': (context) => BlocProvider(
-              create: (context) => BottomNavCubit(),
-              child: MainAppScreen(),
-            ),
-        '/addmed': (context) => AddMedicationPage(),
-      },
-      initialRoute: '/',
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => BottomNavCubit())
+      ],
+      child: MaterialApp(
+        theme: materialTheme,
+        routes: {
+          '/': (context) => MainAppScreen(),
+          '/onboarding': (context) => OnBoardingPages(),
+          '/main': (context) => MainAppScreen(),
+          '/addmed': (context) => AddMedicationPage(),
+        },
+        initialRoute: '/main',
+      ),
     );
   }
 }

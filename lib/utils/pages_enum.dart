@@ -17,7 +17,7 @@ const SETTINGS_PAGE_INDEX = 3;
 
 dynamic PAGES_LIST = [
   HomeScreen(),
-  MedicationList(meds: medications_dummy),
+  MedicationList(),
   ScheduleScreen(),
   
   LocalProfile(),
