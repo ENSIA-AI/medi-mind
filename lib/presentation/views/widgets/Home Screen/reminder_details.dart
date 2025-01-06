@@ -9,7 +9,8 @@ import 'package:medi_mind/themes/styles.dart';
 class MedDetails extends StatelessWidget {
   final Reminder medREminder;
   final Function onDismissed;
-  const MedDetails({super.key, required this.medREminder, required this.onDismissed});
+  const MedDetails(
+      {super.key, required this.medREminder, required this.onDismissed});
 
   void _showBottomSheet(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -78,7 +79,13 @@ class MedDetails extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       // will be a navigation page
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => MedicationDetails(medicationData: Medication(reminderDays: 12, id: 2, name: "Ibuprofen", unit: "Pill(s)"))));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => MedicationDetails(
+                              medicationData: Medication(
+                                  reminderDays: 12,
+                                  id: 2,
+                                  name: "Ibuprofen",
+                                  unit: "Pill(s)"))));
                     },
                     child: Text(
                       "See More",
@@ -103,6 +110,9 @@ class MedDetails extends StatelessWidget {
               _showBottomSheet(context);
               print('Widget clicked!');
             },
-            child: ReminderItem(data:medREminder , onDismissed: onDismissed,)));
+            child: ReminderItem(
+              data: medREminder,
+              onDismissed: onDismissed,
+            )));
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:medi_mind/data/dbhelper/db_helper.dart';
@@ -46,8 +48,6 @@ class MedicationCubit extends Cubit<MedicationState> {
 
       // Fetch medications from the database
       final List<Map<String, dynamic>> medsData = await db.query('medications');
-      print(medsData);
-
       // Convert fetched data to Medication objects
       final List<Medication> medications = medsData
           .map((med) => Medication(
@@ -59,12 +59,31 @@ class MedicationCubit extends Cubit<MedicationState> {
                 endDate: med['endDate'] != null
                     ? DateTime.parse(med['endDate'])
                     : null,
-                reminderDays: med['reminderDays'],
+                reminderDays: med['reminderDays'] as int,
               ))
           .toList();
 
+      final List<Map<String, dynamic>> remindersData =
+          await db.query('intakes');
+      final reminders = remindersData
+          .map((rem) => Reminder_(
+                id: rem['id'],
+                medicationId: rem['medicationId'],
+                dose: rem['dose'],
+                time: rem['time'],
+              ))
+          .toList();
+
+      // Associate reminders with medications
+      for (var medication in medications) {
+        medication.intakes = reminders
+            .where((rem) => rem.medicationId == medication.id)
+            .toList();
+      }
+
       emit(MedicationLoaded(medications));
-    } catch (e) {
+    } catch (e, st) {
+      print(st);
       emit(MedicationError(e.toString()));
     }
   }

@@ -6,12 +6,15 @@ class MedicationTextFormField extends StatelessWidget {
   final String placeholder;
   final TextEditingController controller ;
   final bool longText;
+  final Function? onChange;
   const MedicationTextFormField({
     super.key,
     required this.label,
     required this.placeholder,
     required this.controller,
+    this.onChange = null,
     this.longText = false    
+    
   });
 
   @override
@@ -36,6 +39,9 @@ class MedicationTextFormField extends StatelessWidget {
             maxLines: (longText) ? 3 : 1,
             minLines: (longText) ? 3 : 1,
             controller: controller,
+            onChanged: (value){
+              if(onChange != null) onChange!(value);
+            },
             validator: (value) {
               if(value == null || value.isEmpty ){
                 return "Provide a name!";

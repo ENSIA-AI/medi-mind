@@ -8,7 +8,8 @@ class Medication {
   final int reminderDays; // binary rep of the week days starting from sunday
   final String? details; // Optional additional details
   final DateTime? endDate; // Optional end date for the medication
-
+  List<Reminder_>? intakes;
+  
   Medication({
     required this.reminderDays,
     required this.id,
@@ -17,6 +18,7 @@ class Medication {
     this.img,
     this.details,
     this.endDate,
+    this.intakes
   });
 
   // Serialization (to map)
@@ -44,13 +46,35 @@ class Medication {
       endDate: map['endDate'] != null ? DateTime.parse(map['endDate']) : null,
     );
   }
+
+  Medication copyWith({
+    int? id,
+    String? name,
+    String? unit,
+    Uint8List? img,
+    String? details,
+    DateTime? endDate,
+    int? reminderDays,
+    List<Reminder_>? intakes,
+  }) {
+    return Medication(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      unit: unit ?? this.unit,
+      img: img ?? this.img,
+      details: details ?? this.details,
+      endDate: endDate ?? this.endDate,
+      reminderDays: reminderDays ?? this.reminderDays,
+      intakes: intakes ?? this.intakes,
+    );
+  }
 }
 
 class Reminder_ {
   final int id; // Unique ID for the reminder
   final int medicationId; // Foreign key linking to a medication
-  final String time; // Reminder time in "HH:mm" format
-  final int dose; // Dose to take at this reminder
+  String time; // Reminder time in "HH:mm" format
+  int dose; // Dose to take at this reminder
 
   Reminder_({
     required this.id,

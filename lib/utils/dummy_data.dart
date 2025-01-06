@@ -180,3 +180,25 @@ List<Reminder> reminders = [
         5
       ]),
 ];
+
+
+List<Reminder> upcoming_reminders_list = [
+  Reminder(
+      id: "0",
+      name: "Ibuprofen",
+      selectedDays: [0, 1],
+      frequency: 2,
+      form: "Pill(s)",
+      imageUrl:
+          "https://cdn11.bigcommerce.com/s-n6ynrx6s4d/images/stencil/1280x1280/products/2377/4521/ibuprofen_tabs__60250.1648242731.jpg?c=1",
+      intakes: [IntakeData(dose: 1, time: TimeOfDay.now())]),
+  Reminder(
+      id: "1",
+      name: "Ibuprofen",
+      selectedDays: [0, 1],
+      frequency: 2,
+      form: "Pill(s)",
+      imageUrl:
+          "https://cdn11.bigcommerce.com/s-n6ynrx6s4d/images/stencil/1280x1280/products/2377/4521/ibuprofen_tabs__60250.1648242731.jpg?c=1",
+      intakes: [IntakeData(dose: 1, time: TimeOfDay.now())])
+];

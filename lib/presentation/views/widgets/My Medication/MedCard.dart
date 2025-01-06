@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+
+import 'package:medi_mind/presentation/bloc/medications_bloc.dart';
 import 'package:medi_mind/presentation/views/Medication%20Details%20Pages/medication_details.dart';
-import 'package:medi_mind/presentation/views/widgets/common/progress_circle.dart';
 import 'package:medi_mind/themes/styles.dart';
 import 'package:medi_mind/themes/colors.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medi_mind/data/model/medication.dart';
 
 class MedCard extends StatelessWidget {
@@ -79,12 +78,13 @@ class MedCard extends StatelessWidget {
 
               //three dots
               InkWell(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
+                onTap: () async{
+                  await Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => MedicationDetails(
                       medicationData: medication,
-                    ),
-                  ));
+                    ))
+                  );
+                  context.read<MedicationCubit>().fetchMedications();
                 },
                 child: const Icon(Icons.more_vert, color: Colors.white),
               ),

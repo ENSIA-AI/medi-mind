@@ -54,7 +54,7 @@ class MedicationProvider extends ChangeNotifier {
       notifyListeners();
       return true;
     } else {
-      print("in else");
+      
       currentStep++;
       return await finish();
     }
@@ -72,12 +72,12 @@ class MedicationProvider extends ChangeNotifier {
   // Initialize a UUID generator
 
   Future<bool> finish() async {
-    print("in finish");
+    
     try {
       // 2. Prepare the medication data
       final dbHelper = DbHelper();
       final db = await dbHelper.database;
-      print("got db");
+    
 
       Map<String, dynamic> medicationData = {
         'name': medicationNameController.text,
@@ -92,7 +92,7 @@ class MedicationProvider extends ChangeNotifier {
 
       // 3. Insert medication into the database
       int medicationId = await db.insert('medications', medicationData);
-      print("inserted ${medicationId}");
+      
       // 4. Insert intake data for the medication
       for (int i = 0; i < timesPerDay; i++) {
         final intake = intakeDataList[i];
@@ -104,7 +104,6 @@ class MedicationProvider extends ChangeNotifier {
       }
 
       // 5. Success
-      print("hurray");
       return true;
     } catch (e) {
       // 6. Handle errors
