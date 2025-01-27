@@ -4,7 +4,7 @@ import 'package:medi_mind/themes/styles.dart';
 
 
 
-void showCustomBottomSheet(BuildContext context, typeOfDialog, textOfBottomSheet, leftBtn, rightBtn, {leftBtnAction = null}) {
+void showCustomBottomSheet(BuildContext context, typeOfDialog, textOfBottomSheet, leftBtn, rightBtn, {leftBtnAction = null, rightBtnAction = null}) {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -12,7 +12,7 @@ void showCustomBottomSheet(BuildContext context, typeOfDialog, textOfBottomSheet
     ),
     barrierColor: TRANSPARENT_BG,
       builder: (BuildContext context) {
-        return BottomDialog(typeOfDialog: typeOfDialog, textOfBottomSheet: textOfBottomSheet, leftBtn: leftBtn, rightBtn: rightBtn, leftBtnAction: leftBtnAction);
+        return BottomDialog(typeOfDialog: typeOfDialog, textOfBottomSheet: textOfBottomSheet, leftBtn: leftBtn, rightBtn: rightBtn, leftBtnAction: leftBtnAction, rightBtnAction: rightBtnAction);
       },
     );
   }
@@ -24,6 +24,7 @@ class BottomDialog extends StatelessWidget {
   final String leftBtn;
   final String rightBtn;
   final Function? leftBtnAction;
+  final Function? rightBtnAction;
 
   const BottomDialog({
     super.key,
@@ -32,6 +33,7 @@ class BottomDialog extends StatelessWidget {
     required this.leftBtn,
     required this.rightBtn,
     this.leftBtnAction,
+    this.rightBtnAction,
   });
 
   
@@ -68,7 +70,7 @@ class BottomDialog extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                     print("pressed $rightBtn");
+                      if(rightBtnAction != null) rightBtnAction!();
                     },
                     style : PRIMARY_ACTION_BUTTON_STYLE,
                     child: Text(rightBtn ,style: WHITE_REGULAR_TEXT_STYLE,)

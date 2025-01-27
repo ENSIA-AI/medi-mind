@@ -82,10 +82,10 @@ class MedicationProvider extends ChangeNotifier {
       Map<String, dynamic> medicationData = {
         'name': medicationNameController.text,
         'unit': selectedUnit!,
-        'img': image ?? '',
+        'img': image, // Save as an empty Uint8List when image is null
         'details': '', // Add details field if needed
         'startDate':
-            DateTime.now().toIso8601String(), // Assuming start date is now
+        DateTime.now().toIso8601String(), // Assuming start date is now
         'endDate': null, // Modify as needed
         'reminderDays': constructReminderDays(selectedDays)
       };

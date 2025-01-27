@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medi_mind/consts/consts.dart';
 import 'package:medi_mind/data/model/intake.dart';
 import 'package:medi_mind/data/providers/addMedication/medication_provider.dart';
+import 'package:medi_mind/presentation/bloc/bottom_nav_bloc.dart';
 import 'package:medi_mind/presentation/views/widgets/Add%20Medication/SelectTimes.dart';
 import 'package:medi_mind/presentation/views/widgets/Add%20Medication/day_selector.dart';
 import 'package:medi_mind/presentation/views/widgets/Add%20Medication/intake_complex_input.dart';
@@ -258,6 +259,13 @@ class AddMedicationPage extends StatelessWidget {
                 ShowToastMessage("Added Medication Successfully!");
                 
                 Navigator.of(context).pushReplacementNamed('/main');
+
+                context.read<BottomNavCubit>().changeSelectedPage(0);
+
+                ShowToastMessage("Added Medication Successfully!");
+                
+                // Reset bottom navigation state
+                
               }
             },
             style: PRIMARY_ACTION_BUTTON_STYLE,

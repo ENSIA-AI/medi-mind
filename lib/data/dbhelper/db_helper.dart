@@ -17,7 +17,14 @@ class DbHelper {
 
   Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), 'medimind.db');
-    return await openDatabase(path, version: 1, onCreate: _onCreate);
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: _onCreate,
+      onConfigure: (db) async {
+        await db.execute('PRAGMA foreign_keys = ON');
+      },
+    );
   }
 
   Future<void> _onCreate(Database db, int version) async {
@@ -50,7 +57,7 @@ class DbHelper {
         intakeId INTEGER,
         date TEXT,
         status INTEGER NOT NULL, -- 1 = Done, 0 = Skipped
-        FOREIGN KEY (intakeId) REFERENCES intakes (id)
+        FOREIGN KEY (intakeId) REFERENCES intakes (id) ON DELETE CASCADE
       )
     ''');
   }

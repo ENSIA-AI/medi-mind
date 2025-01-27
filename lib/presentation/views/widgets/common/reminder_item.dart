@@ -2,8 +2,10 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:medi_mind/data/model/reminder.dart';
+import 'package:medi_mind/presentation/bloc/home_bloc.dart';
 import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/themes/styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReminderItem_ extends StatelessWidget {
   final Map<String, dynamic> data; // The data schema provided
@@ -29,11 +31,14 @@ class ReminderItem_ extends StatelessWidget {
       child: Dismissible(
         direction: DismissDirection.endToStart,
         onDismissed: (direction) {
-          onDismissed(data['id']);
+          if (data['id'] != null) {
+            print(" I'm CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALLED");
+            context.read<HomeCubit>().markReminderAsTaken(data['id']);
+          }
         },
-        key: Key(data['id'].toString()),
+        key: Key(data['id']?.toString() ?? UniqueKey().toString()),
         background: const ColoredBox(
-          color: Colors.red,
+          color: Colors.green,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Row(
@@ -154,7 +159,7 @@ class ReminderItem extends StatelessWidget {
           key: Key(data.id.toString()),
           background: Container(
             decoration: BoxDecoration(
-              color: Colors.red,
+              color: Colors.green,
             ),
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),

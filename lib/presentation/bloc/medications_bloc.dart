@@ -48,6 +48,7 @@ class MedicationCubit extends Cubit<MedicationState> {
 
       // Fetch medications from the database
       final List<Map<String, dynamic>> medsData = await db.query('medications');
+      print("Medications data: $medsData");
       // Convert fetched data to Medication objects
       final List<Medication> medications = medsData
           .map((med) => Medication(
@@ -74,12 +75,15 @@ class MedicationCubit extends Cubit<MedicationState> {
               ))
           .toList();
 
+      print("Medications: $medications");
+
       // Associate reminders with medications
       for (var medication in medications) {
         medication.intakes = reminders
             .where((rem) => rem.medicationId == medication.id)
             .toList();
       }
+      
 
       emit(MedicationLoaded(medications));
     } catch (e, st) {

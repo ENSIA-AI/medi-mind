@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:medi_mind/data/dbhelper/db_helper.dart';
 import 'package:medi_mind/data/model/medication.dart';
@@ -8,7 +7,6 @@ import 'package:medi_mind/presentation/views/widgets/Medication%20Details/medica
 import 'package:medi_mind/presentation/views/widgets/common/action_button.dart';
 import 'package:medi_mind/presentation/views/widgets/common/app_barV2.dart';
 import 'package:medi_mind/presentation/views/widgets/common/bottom_sheet.dart';
-import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/themes/styles.dart';
 import 'package:medi_mind/utils/binary_selected_days.dart';
 import 'package:medi_mind/utils/toast_message.dart';
@@ -28,6 +26,7 @@ class _MedicationDetailsState extends State<MedicationDetails> {
     final DbHelper _dbHelper = DbHelper();
 
   Future<void> _deleteMedication() async {
+    print("I'm CALLED on ${widget.medicationData.id}");
     var db = await _dbHelper.database;
     await db.delete(
       'medications',
@@ -79,7 +78,7 @@ class _MedicationDetailsState extends State<MedicationDetails> {
                 child: ActionButton(
                     text: "Delete Medication",
                     onPressed: () {
-                      showCustomBottomSheet(context, "Delete Medication", "This action is irreversible", "Delete", "Cancel", leftBtnAction: _deleteMedication);
+                      showCustomBottomSheet(context, "Delete Medication", "This action is irreversible", "Delete", "Cancel", leftBtnAction: _deleteMedication, rightBtnAction: () => Navigator.pop(context));
                     },
                     style: SECONDARY_ACTION_BUTTON_STYLE,
                     textStyle: SECONDARY_ACTION_BUTTON_TEXT_STYLE))
