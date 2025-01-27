@@ -46,7 +46,8 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> fetchUpcomingReminders() async {
     final db = await _dbHelper.database;
     final now = DateTime.now();
-    final currentDayBit = 1 << (now.weekday - 1);
+    // Adjust weekday to make Monday = 0 (subtract 1 from weekday and use modulo 7)
+    final currentDayBit = 1 << ((now.weekday - 1) % 7);
     final currentTime =
         '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
 
@@ -87,18 +88,20 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> calculateWeekProgress() async {
     final db = await _dbHelper.database;
     final now = DateTime.now();
-    List<double> weekProgress = [];
+    List<double> weekProgress = List.filled(7, 0.0);
 
     for (int i = 6; i >= 0; i--) {
       final date = now.subtract(Duration(days: i));
       final dateStr = date.toIso8601String().split('T')[0];
+      // Adjust weekday to make Monday = 0
+      final dayBit = 1 << ((date.weekday - 1) % 7);
 
       // Get total reminders for that day
       final totalReminders = Sqflite.firstIntValue(await db.rawQuery('''
         SELECT COUNT(*) FROM intakes i
         JOIN medications m ON i.medicationId = m.id
         WHERE (m.reminderDays & ?) != 0
-      ''', [1 << (date.weekday - 1)])) ?? 0;
+      ''', [dayBit])) ?? 0;
 
       // Get completed reminders
       final completedReminders = Sqflite.firstIntValue(await db.rawQuery('''
@@ -110,12 +113,8 @@ class HomeCubit extends Cubit<HomeState> {
 
       double progress =
           totalReminders > 0 ? completedReminders / totalReminders : 0.0;
-      weekProgress.add(progress);
-      weekProgress = weekProgress.reversed.toList();
+      weekProgress[6 - i] = progress;
     }
-
-    
-    
 
     emit(state.copyWith(weekProgress: weekProgress));
   }
