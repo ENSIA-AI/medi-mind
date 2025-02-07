@@ -16,16 +16,17 @@ class DbHelper {
   }
 
   Future<Database> _initDatabase() async {
-    String path = join(await getDatabasesPath(), 'medimind.db');
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: _onCreate,
-      onConfigure: (db) async {
-        await db.execute('PRAGMA foreign_keys = ON');
-      },
-    );
-  }
+  String path = join(await getDatabasesPath(), 'medimind.db');
+  return await openDatabase(
+    path,
+    version: 2, // 🔹 Incremented from 1 to 2
+    onCreate: _onCreate,
+    onUpgrade: _onUpgrade, // 🔹 Add this
+    onConfigure: (db) async {
+      await db.execute('PRAGMA foreign_keys = ON');
+    },
+  );
+}
 
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
@@ -58,6 +59,23 @@ class DbHelper {
         date TEXT,
         status INTEGER NOT NULL, -- 1 = Done, 0 = Skipped
         FOREIGN KEY (intakeId) REFERENCES intakes (id) ON DELETE CASCADE
+      )
+    ''');
+
+  }
+}
+Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
+  if (oldVersion < 2) {
+    await db.execute('''
+      CREATE TABLE notifications (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        unitDose TEXT NOT NULL,
+        takeTime TEXT NOT NULL,
+        taskValue INTEGER NOT NULL,
+        notifTime TEXT NOT NULL,
+        sendingTime INTEGER NOT NULL,
+        date TEXT NOT NULL
       )
     ''');
   }
