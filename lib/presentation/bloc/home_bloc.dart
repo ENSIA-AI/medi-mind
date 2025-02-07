@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medi_mind/data/dbhelper/db_helper.dart';
+import 'package:medi_mind/data/dbhelper/notificationDbHelper.dart';
 import 'package:medi_mind/data/model/intake.dart';
 import 'package:medi_mind/data/model/reminder.dart';
 import 'package:sqflite/sqflite.dart';
@@ -128,7 +129,8 @@ class HomeCubit extends Cubit<HomeState> {
       'date': now.toIso8601String(),
       'status': 1,
     });
-
+     await markReminderAsDone(
+        intakeId: intakeId, nowdate: now.toIso8601String());
     ShowToastMessage("Reminder marked as taken!");
     await calculateWeekProgress();
     await fetchUpcomingReminders();

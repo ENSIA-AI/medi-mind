@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medi_mind/presentation/views/privacy_policy.dart';
 import 'package:medi_mind/presentation/views/report_screen.dart';
 import 'package:medi_mind/presentation/views/settings_screen.dart';
-import 'package:medi_mind/presentation/views/widgets/profile/action_button.dart';
+import 'package:medi_mind/presentation/views/widgets/common/logo_name_widget.dart';
 import 'package:medi_mind/themes/styles.dart';
 import 'package:medi_mind/presentation/views/widgets/profile/Tile.dart';
 
@@ -22,47 +22,39 @@ class LocalProfile extends StatelessWidget {
         //space 
         const SizedBox(height: 50,),
 
-        //text
-        Container(
-          padding: EdgeInsets.all(30),
-          alignment: Alignment.center,
-          child: Text(
-            'Sign Up Or Log In To MedMind And Unlock More Features To Stay On Top Of Your Health',
-            textAlign: TextAlign.center,
-            style: TextStyle( fontSize: 17, fontWeight: FontWeight.w600, color: Color(0xFF031D44) ),
-                     ),
-        ),
-
-        //space 
-        const SizedBox(height: 10,),
-
-        //buttons
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            ActionButton(text: 'Log In', onPressed: (){}, style: PRIMARY_ACTION_BUTTON_STYLE, textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Color(0xFFFFEAAE))),
-            ActionButton(text: 'Sign Up', onPressed: (){}, style: SECONDARY_ACTION_BUTTON_STYLE, textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Color(0xFFFFFFFF)))
-          ],
-        ),
+        Center(
+                    child: Container(
+                      child: Column(
+                        children: [
+                          const LogoNameWidget(),
+                          Text(
+                            'Simplifying your medication routine, \none reminder at a time',
+                            style: BLUE_SUBHEADING_TEXT_STYLE,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
 
         //space
-        SizedBox(height: 20,),
+        const SizedBox(height: 40,),
 
         //options list
         Expanded(
           child: ListView(
               children: [
                 ProfileTile(title: 'Report', path: 'assets/icons/Report.svg', onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => ReportScreen()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ReportScreen()));
                 },),
                 ProfileTile(title: 'Privacy Policy', path: 'assets/icons/Privacy.svg', onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => PrivacyPolicy()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PrivacyPolicy()));
                 },),
                 ProfileTile(title: 'Settings', path: 'assets/icons/Settings.svg', onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingsScreen()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SettingsScreen()));
                 },),
                 ProfileTile(title: 'About Us', path: 'assets/icons/AboutUs.svg', onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutDialog()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AboutDialog()));
                 },),
               ],
             ),
