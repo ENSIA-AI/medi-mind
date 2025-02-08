@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:medi_mind/presentation/views/widgets/Settings/switch_settings.dart';
 import 'package:medi_mind/presentation/views/widgets/common/app_barV2.dart';
 import 'package:medi_mind/themes/colors.dart';
+import 'package:medi_mind/utils/toast_message.dart';
 
 class NotificationSettingsScreen extends StatefulWidget {
+  const NotificationSettingsScreen({super.key});
+
   @override
   _NotificationSettingsScreenState createState() =>
       _NotificationSettingsScreenState();
@@ -104,6 +107,7 @@ class _NotificationSettingsScreenState
                       DropdownButton<String>(
                         value: reminderInterval,
                         onChanged: (String? newValue) {
+                          ShowToastMessage("coming soon...");
                           setState(() {
                             reminderInterval = newValue!;
                           });
@@ -158,6 +162,7 @@ class _NotificationSettingsScreenState
                       const Spacer(),
                       TextButton(
                         onPressed: () {
+                          ShowToastMessage("coming soon...");
                           print("Modify the sound of the notification");
                         },
                         child: const Text(
@@ -172,7 +177,7 @@ class _NotificationSettingsScreenState
                       ),
                     ],
                   ),
-                  Divider(),
+                  const Divider(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -238,6 +243,7 @@ class _NotificationSettingsScreenState
     return Expanded(
       child: GestureDetector(
         onTap: () {
+          ShowToastMessage("coming soon...");
           setState(() {
             selectedImageIndex = index;
           });

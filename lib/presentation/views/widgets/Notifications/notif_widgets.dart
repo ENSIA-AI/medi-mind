@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medi_mind/data/model/notification_obj.dart';
 import 'package:medi_mind/themes/colors.dart';
-import 'package:medi_mind/utils/dates.dart';
 
 // require the string value
 class labelWidget extends StatelessWidget {
@@ -55,7 +54,7 @@ class NotificationItem extends StatelessWidget {
               BoxShadow(
                 color: Colors.black.withOpacity(0.1),
                 blurRadius: 6,
-                offset: Offset(0, 3),
+                offset: const Offset(0, 3),
               ),
             ],
           ),
@@ -67,10 +66,10 @@ class NotificationItem extends StatelessWidget {
                   height: 48,
                   decoration: BoxDecoration(
                     color:
-                        notification.taskValue ? Colors.green : SECONDARY_BURGUNDY,
+                        notification.taskValue >= 1? Colors.green : SECONDARY_BURGUNDY,// if = 1 means that the notification have been taken 
                     shape: BoxShape.circle,
                   ),
-                  child: notification.taskValue
+                  child: notification.taskValue >= 1
                       ? const Icon(
                           Icons.check_circle_outline,
                           color: Colors.white,
@@ -86,7 +85,15 @@ class NotificationItem extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: [Text(
+                            notification.taskValue == 1 ? "Next Reminder For ":notification.taskValue == 2? "Medication taken": "Missed Reminder",
+                            style: TextStyle(
+                              color:  notification.taskValue >= 1? Colors.green : SECONDARY_BURGUNDY,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Spartan League",
+                               fontSize: 20
+                            ),
+                          ),
                     RichText(
                       text: TextSpan(
                         style: const TextStyle(
@@ -96,12 +103,12 @@ class NotificationItem extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: notification.data.name,
+                            text: notification.name,
                             style: const TextStyle(
                               color: PRIMARY_BLUE,
                               fontWeight: FontWeight.bold,
                               fontFamily: "Spartan League",
-                               fontSize: 20
+                               fontSize: 17
                             ),
                           ),
                           const TextSpan(
@@ -109,16 +116,16 @@ class NotificationItem extends StatelessWidget {
                             style: TextStyle(
                               color: PRIMARY_BLUE,
                               fontWeight: FontWeight.bold,
-                              fontSize: 20
+                              fontSize: 17
                             ),
         
                           ),
                           TextSpan(
-                            text: notification.data.intakes[0].dose.toString(),
+                            text: notification.unitDose,
                             style: const TextStyle(
                               color: PRIMARY_BLUE,
                               fontWeight: FontWeight.bold,
-                              fontSize: 20
+                              fontSize: 17
                             ),
                           ),
                         ],
@@ -135,7 +142,7 @@ class NotificationItem extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          notification.data.intakes[0].time.format24Hour(),
+                          notification.takeTime, // fix the format if needed later
                           style: const TextStyle(
                             color: PRIMARY_BLUE,
                             fontSize: 18,
@@ -150,7 +157,7 @@ class NotificationItem extends StatelessWidget {
               const SizedBox(width: 16),
               // Duration
               Text(
-                notification.notifTime.truncate().toString() + 'min',
+                notification.notifTime,
                 style: const TextStyle(
                   color: PRIMARY_BLUE,
                   fontSize: 18,
