@@ -151,6 +151,7 @@ class ScheduleScreen extends StatelessWidget {
                                 child: Card(
                                   child: ReminderItem_(
                                       inverseStyle: true,
+                                      dismissible: false,
                                       data: sortedReminders[index],
                                       onDismissed: () {
                                         print("dismissed");

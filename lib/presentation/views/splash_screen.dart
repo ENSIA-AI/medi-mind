@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/themes/styles.dart';
+import 'package:medi_mind/services/first_launch_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -34,24 +35,27 @@ class _SplashScreenState extends State<SplashScreen>
 
   Future<void> _startAnimations() async {
     // Animate the icon
-    await Future.delayed(const Duration(milliseconds: 500)); // Optional delay
+    await Future.delayed(const Duration(milliseconds: 500));
     setState(() {
       _iconOpacity = 1;
-      _iconPosition = 0; // Move icon to its final position
+      _iconPosition = 0;
     });
 
-    // Animate the text after the icon animation
+    // Animate the text
     await Future.delayed(const Duration(milliseconds: 500));
     setState(() {
       _textOpacity = 1;
-      _textPosition = 0; // Move text to its final position
+      _textPosition = 0;
     });
 
-    // Navigate to the next screen after a short delay
+    // Check if it's first launch
+    bool isFirstLaunch = await FirstLaunchService.isFirstLaunch();
+
+    // Navigate to appropriate screen after animation
     await Future.delayed(const Duration(milliseconds: 500));
     if (mounted) {
       Navigator.pushReplacementNamed(
-          context, '/onboarding');
+          context, isFirstLaunch ? '/onboarding' : '/main');
     }
   }
 

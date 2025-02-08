@@ -46,7 +46,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 size: 20,
               ),
               onTap: () {
-                ShowToastMessage("Comming soon...");
+                ShowToastMessage("Coming soon...");
                 print("Change language");
               },
             ),
@@ -55,7 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: 'Activate Dark Mode',
             boolValue: isDarkMode,
             onChanged: (bool value) {
-              ShowToastMessage("coming soon...");
+              ShowToastMessage("Coming soon...");
               setState(() {
                 isDarkMode = value;
                 print("$value is dark mode");

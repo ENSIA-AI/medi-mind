@@ -133,18 +133,16 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => BottomNavCubit())
-      ],
+      providers: [BlocProvider(create: (context) => BottomNavCubit())],
       child: MaterialApp(
         theme: materialTheme,
         routes: {
-          '/': (context) => MainAppScreen(),
-          '/onboarding': (context) => OnBoardingPages(),
-          '/main': (context) => MainAppScreen(),
-          '/addmed': (context) => AddMedicationPage(),
+          '/': (context) => const SplashScreen(),
+          '/onboarding': (context) => const OnBoardingPages(),
+          '/main': (context) => const MainAppScreen(),
+          '/addmed': (context) => const AddMedicationPage(),
         },
-        initialRoute: '/main',
+        initialRoute: '/',
       ),
     );
   }
