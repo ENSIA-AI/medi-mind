@@ -98,7 +98,7 @@ class _OnBoardingPagesState extends State<OnBoardingPages> {
                               foregroundColor: Colors.white,
                               backgroundColor: PRIMARY_BLUE, elevation: 5),
                           onPressed: (){
-                            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => WelcomeScreen()));
+                            Navigator.of(context).pushReplacementNamed('/main');
                           },
                           child: Text("Get Started", style: TextStyle(
                             fontSize: 20,

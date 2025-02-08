@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:medi_mind/themes/colors.dart';
 import 'package:medi_mind/themes/styles.dart';
-import 'package:medi_mind/services/first_launch_service.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -49,13 +49,13 @@ class _SplashScreenState extends State<SplashScreen>
     });
 
     // Check if it's first launch
-    bool isFirstLaunch = await FirstLaunchService.isFirstLaunch();
+    
 
     // Navigate to appropriate screen after animation
     await Future.delayed(const Duration(milliseconds: 500));
     if (mounted) {
-      Navigator.pushReplacementNamed(
-          context, isFirstLaunch ? '/onboarding' : '/main');
+      Navigator.pushReplacementNamed( context,
+          '/onboarding');
     }
   }
 
